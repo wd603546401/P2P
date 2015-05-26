@@ -1,0 +1,103 @@
+<div class="blank20"></div>
+<div class="bdd wb" >
+	<div class="list_title clearfix">
+		<div class="cur">贷款描述</div>
+	</div>
+	<div class="clearfix pt5 pb5 pl5 pr5">
+		<div class="clearfix p5"   style="line-height:50px">
+			<div class="clearfix">
+				{if $borrowpay eq 1}
+				<p class="f_l" style="width: 250px; padding-left:100px">
+					每月需还利息： <span class="f_red">￥{function name="number_format" v=$lixi f=2}</span>
+				</p>
+				{/if}
+				<p class="f_l" style="width: 250px; padding-left:100px">
+					{if $borrowpay eq 1}
+					到期需还本金：  <span class="f_red">￥{function name="number_format" v=$borrowamount f=2}</span>
+					{else}
+					每月需还本息： <span class="f_red">￥{function name="number_format" v=$repayamount f=2}</span>
+					{/if}
+				</p>
+				<p class="f_l" style="width: 250px; padding-left:100px">
+					您将在<span class="f_red"> {$repaytime} </span> 个月后还清贷款
+				</p>
+			</div>
+			<div class="clearfix">
+				<p class="f_l" style="width: 250px ; padding-left:100px">
+					<span style="margin-left: 35px">月利率：</span> 
+					<span class="f_red">
+					{function name="number_format" v=$rate f=2}%</span>
+				</p>
+				<p class="f_l" style="width: 250px; padding-left:100px">
+					您需还本息共 <span class="f_red">
+					￥{function name="number_format" v=$repayallamount f=2}</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+{if $list}
+<div class="blank20"></div>
+<div class="bdd wb">
+	<div class="list_title clearfix">
+		<div class="cur">本息偿还时间表</div>
+	</div>
+	<div class="blank20"></div>
+	<div class="blank20"></div>
+	<div class="blank20"></div>
+	<div class="pt10 pb10 bdd"  style="width:900px">
+		<div class="clearfix">
+			<div class="clearfix tc  pb5"  style="line-height:50px">
+				<div class="f_l f_dgray b" style="width: 150px">月份</div>
+				<div class="f_l f_dgray b" style="width: 150px">月还本息</div>
+				<div class="f_l f_dgray b" style="width: 150px">月还本金</div>
+				<div class="f_l f_dgray b" style="width: 120px">月还利息</div>
+				<div class="f_l f_dgray b" style="width: 120px">借款管理费</div>
+				<div class="f_l f_dgray b" style="width: 115px">本息余额</div>
+			</div>
+			<div class="dot"></div>
+		</div>
+		<div class="clearfix">
+			<div class="clearfix tc odd" style="line-height:50px">
+				<div class="f_l f_dgray " style="width: 150px;"> &nbsp;</div>
+				<div class="f_l f_dgray " style="width: 150px;"> &nbsp;</div>
+				<div class="f_l f_dgray " style="width: 150px;"> &nbsp;</div>
+				<div class="f_l f_dgray " style="width: 120px;"> &nbsp;</div>
+				<div class="f_l f_dgray " style="width: 120px;"> &nbsp;</div>
+				<div class="f_l f_dgray " style="width: 115px;">
+					￥ {function name="number_format" v=$repayallamount f=2}
+				</div>
+			</div>
+			<div class="dot"></div>
+		</div>
+		{foreach from=$list item=item key=key}
+		<div class="clearfix">
+			<div class="clearfix tc wb" style="line-height:50px">
+				<div class="f_l f_dgray" style="width: 150px; ">
+					{$key} 月
+				</div>
+				<div class="f_l f_dgray" style="width: 150px; ">
+					￥ {function name="number_format" v=$item.repayamount f=2}
+				</div>
+				<div class="f_l f_dgray" style="width: 150px; ">
+					￥ {function name="number_format" v=$item.r_smoney f=2}
+				</div>
+				<div class="f_l f_dgray" style="width: 120px; ">
+					￥{function name="number_format" v=$item.r_rmoney f=2}
+				</div>
+				<div class="f_l f_dgray" style="width: 120px; ">
+					 ￥ {function name="number_format" v=$r_mmoney f=2}
+				</div>
+				<div class="f_l f_dgray" style="width: 115px; ">
+					￥{function name="number_format" v=$item.r_money f=2}
+				</div>
+			</div>
+			<div class="dot"></div>
+		</div>
+		{/foreach}
+	</div>
+	<div class="blank20"></div>
+	<div class="blank20"></div>
+	<div class="blank20"></div>
+</div>
+{/if}

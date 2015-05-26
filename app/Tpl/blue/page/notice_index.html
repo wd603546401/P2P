@@ -1,0 +1,25 @@
+{include file="inc/header.html"} 
+<div class="blank"></div>
+	<div class="short f_l">
+		<div class="inc">
+			<div class="inc_main cf">
+				<div class="relate_help clearfix">
+					{foreach from=$cate_list item="cate_item" key=key}
+					{if $cate_item.type_id eq 0 || $cate_item.type_id eq 2}
+					<dl class="bdd" style="border-top:none">
+						<dt {if $cate_item.id neq $cate.id}class="nobg"{/if}><a href="{$cate_item.url}" class="user_lf_link" rel="{$cate_item.id}">{$cate_item.title}</a></dt>
+					</dl>
+					{/if}
+					{/foreach}
+				</div>
+			</div>	
+		</div>
+		
+	</div>
+	<div class="long help_long wb f_r" style="width:878px;" >
+		<div >
+			{include file="inc/inc_article_info.html"}
+		</div>
+	</div>
+<div class="blank"></div>
+{include file="inc/footer.html"}

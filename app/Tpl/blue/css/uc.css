@@ -1,0 +1,165 @@
+.i_deal_list table td{ font-size:14px}
+.u_box { width:848px; overflow:hidden; }
+.u_img {margin-right: 10px;}
+.u_img img { width:117px; height:117px; border:1px solid #e3e3e3; padding:1px; overflow:hidden }
+.u_infobox {color: #2c2c2c; width:250px; *width:240px; }
+.u_infobox .u_l1 {display: block;line-height: 24px;height: 24px; }
+.u_infobox .user_name{ font-weight:bolder;}
+.u_infobox .user_name .name{ color:#29A9DF; font-weight:bolder;}
+.u_infobox .u_l1 .u_money {color: #c90000;margin-right: 2px;}
+.uc_user_info .desc{ width:715px; *width:710px; }
+.uc_user_info .recharge{ text-align:right; }
+.uc_user_info .recharge a{ color:#fff; display:inline-block; font-size:16px; height:30px; line-height:30px; margin-left:10px; padding:0 24px; text-decoration:none; -moz-border-radius:15px; -khtml-border-radius:15px; -webkit-border-radius:15px; border-radius:15px; }
+.uc_user_info .recharge a.rcg{ background-color:#f5634d; }
+.uc_user_info .recharge a.wdl{ background-color:#00bef0; }
+
+.u_total_box, .u_frozen_box {font-size: 14px; }
+.u_total_box{padding-right:15px;}
+.u_total_box .u_money, .u_frozen_box .u_money {display: block;clear: both;font-size: 35px;font-family: Vani,Arial;color: #3f9d1f;margin-top: 10px;}
+
+.uinfo_settting {
+	margin-top:2px;
+}
+.uinfo_settting  .set{border:1px solid #eee; margin-right:5px; display:block; float:left; height:25px; line-height:300px; overflow:hidden; width:25px; background:url(../images/passedstatus.jpg) no-repeat 0 0; -moz-border-radius:2px; -khtml-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; }
+.uinfo_settting .smobile{background-position:-29px 1px;}
+.uinfo_settting .smobilepassed{background-position:-29px -29px;}
+
+.uinfo_settting .saccount{background-position:2px 1px;}
+.uinfo_settting .saccountpassed{background-position:2px -29px;}
+
+.uinfo_settting .spaypwd{background-position:-90px 1px;}
+.uinfo_settting .spaypwdpassed{background-position:-90px -29px;}
+
+.uinfo_settting .semail{background-position:-60px 1px;}
+.uinfo_settting .semailpassed{background-position:-60px -29px;}
+
+.uinfo_settting .ssetting{ background-position:-119px -29px;}
+
+
+.u_z , .u_t , .u_j {
+	width: 155px;
+	padding-left:55px;
+	height:64px;
+	display:inline;
+	background: url(../images/u_z.gif) no-repeat left top;
+	float:left;
+	margin:26px 0 20px 70px;
+}
+
+.u_z {
+	background: url(../images/u_z.gif) no-repeat left top;
+}
+
+.u_t {
+background: url(../images/u_t.gif) no-repeat left top;
+}
+.u_j {
+background: url(../images/u_j.gif) no-repeat left top;
+}
+
+.u_z span, .u_t span, .u_j span {
+	font-size: 20px;
+	margin-left: 14px;
+	margin-top: 8px;
+	display: block;
+	}
+.u_z span {
+color: #29a9df;
+}
+.u_t span {
+color: #3f9d1f;
+}
+.u_j span {
+color: #f5634d;
+}
+.u_z div, .u_t div, .u_j div {
+	margin-left: 14px;
+	margin-top: 8px;
+	color: #303030;
+}
+
+.u_main_t { width:848px; overflow:hidden; }
+
+
+.u_main_c{ width:848px; overflow:hidden; }
+.u_main_c .u_t_box{ width:255px; border:solid 1px #ddd; border-top:solid 1px #ddd; float:left; margin-right:10px }
+.u_main_c .u_tbgl{ border-top:solid 2px #ff8400;}
+.u_main_c .u_dhk{ border-top:solid 2px #0697da;}
+.u_main_c .u_zjjy{ border-top:solid 2px #3fbb18; margin-right:0; width:310px}
+.u_main_c  .u_title{ background:#f8f8f8; height:40px; line-height:40px; padding-left:13px; }
+.u_main_c .u_t_box .u_more{ width:22px; height:22px; display:inline; float:right; background:url(../images/ico_more.gif) no-repeat left top; margin-right:9px; margin-top:9px;}
+.u_main_c .u_t_box ul{ width:100%;}
+.u_main_c .u_t_box ul li{ border-bottom:solid 1px #ddd; height:36px; line-height:36px; padding-left:5px; padding-right:5px;}
+.u_main_c .u_t_box ul li.u_title{ background:#fff; font-weight:bold; color:#000;}
+.u_main_c .u_t_box ul li.u_title .u_c_1{ color:#000; font-size:12px;}
+.u_main_c .u_t_box ul li.u_last{ border:none;}
+.u_main_c .u_t_box ul li .u_c_1{ width:55px; display:block; float:left; text-align:left; color:#00648d; font-size:14px;}
+.u_main_c .u_t_box ul li .u_c_2{ display:block; float:left;  text-align:left;}
+.u_main_c .u_t_box ul li .u_c_3{ display:block; float:right;  text-align:right;}
+.u_main_c .u_t_box ul li .u_c_4{display:block; float:left;  text-align:left;}
+
+
+.u_main_b{ border:solid 1px #e1e1e1; background:#f9f9f9;}
+.u_m_title_t{ color:#f5634d; font-size:30px; font-family:微软雅黑,黑体; margin-top:33px; margin-bottom:0; text-align:center;}
+.u_m_title_d{ color:#3f9d1f; font-size:30px; font-family:微软雅黑,黑体; padding-top:33px; margin-bottom:43px; text-align:center; border-top:solid 1px #e0e0e0;}
+.u_m_con_d { height:100px;}
+.u_m_con_d div{ float:left; width:120px;}
+.u_m_con_d .m_eq{ width:45px; height:44px; background:url(../images/ico_eq.gif) no-repeat left top; display:block;}
+.u_m_con_d .m_add{ width:45px; height:44px; background:url(../images/ico_add.gif) no-repeat left top; display:block;}
+.u_m_con_d .u_money{ display:block; color:#3f9d1f; font-size:18px; font-family:Vani,Arial;}
+.u_m_con_d .u_m_zc{ margin-right:9px; padding-left:70px;}
+.u_m_con_d .u_m_lc,.u_m_con_d .u_m_jk,.u_m_con_d .u_m_ye{ margin-left:9px; margin-right:9px; width:130px;}
+.u_m_con_d .u_m_ye{ margin-right:0;}
+.u_m_con_d .u_m_jk .u_money{ color:#f5634d;}
+
+
+.u_m_con_t {}
+.u_m_con_t ul { width:100%;}
+.u_m_con_t ul li{ background:url(../images/btn_line.gif) repeat-x left bottom; height:48px; line-height:48px; margin-left:30px; margin-right:30px;}
+.u_m_con_t ul li.line_box{}
+.u_m_con_t ul li.line_box div{ width:16.5%; display:block; float:left; position:relative; height:100%; display:block; z-index:5;}
+.u_m_con_t ul li.line_box div span{ height:0px; display:block; position:absolute; bottom:0; right:15px; -moz-border-radius: 3px; -webkit-border-radius: 3px;   border-radius:3px; z-index:10;}
+.u_m_con_t ul li .red_line{ width:32px; background:url(../images/line.gif) no-repeat right center;}
+.u_m_con_t ul li .blue_line{ width:32px; background:url(../images/line.gif) no-repeat left center;}
+.u_m_con_t ul li.u_last{ background:none; margin-bottom:20px; clear:both;}
+.u_m_con_t ul li.u_last span{ width:16.5%; display:block; text-align:right; float:left; color:#000;}
+
+.uc_r_bl_box .field .passed{ float:right; display:block; padding-left:18px; height:18px; line-height:18px; background:url(../images/noauth.png) no-repeat 0 center}
+.uc_r_bl_box .field .passed a{color:#00bef0}
+.uc_r_bl_box .field .passed.yes{ background:url(../images/pass.png) no-repeat 0 center; color:#ccc; padding-left:20px;}
+
+.security-ul{ padding:0 40px}
+.security-ul li{ clear:both; border-bottom:1px solid #eee;  margin:0px;padding:20px 0;}
+.security-ul li .it .icon{ background:url(../images/uc_icon.png) no-repeat 0 0; float:left; margin-right:30px; height:30px; width:34px}
+.security-ul li .it .nicheng{ background-position:0 3px}
+.security-ul li .it .reaname{ background-position:0 -29px}
+.security-ul li .it .pwd{ background-position:0 -66px}
+.security-ul li .it .email{ background-position:0px -103px}
+.security-ul li .it .mobile{ background-position:0px -138px}
+.security-ul li .it .paypwd{ background-position:0px -182px}
+.security-ul li .it h3{ font-weight:bolder;float: left;width: 150px;font-size: 18px;font-weight: 500;}
+.security-ul li .it p {float: left;width: 250px; }
+.security-ul li .it .update {float: right;color: #ccc;}
+.security-ul li .it .update a{ color:#00bef0}
+
+
+.safety_step {padding-top: 30px;}
+.safety_step ul {position: relative;}
+.safety_step .bgline {background: #C9EFFF;font-size: 0;height: 5px;top: 31px;width: 100%;z-index: 1;}
+.safety_step .steps {position: relative;}
+.safety_step .fourStep, .safety_step .threeStep {left: 120px;top: -19px;}
+.safety_step .fourStep ul li, .safety_step .threeStep ul li {width: 135px;padding-left: 0; clear:none;border:none}
+.safety_step ul li {float: left;text-align: center;background-image: url(../images/safety-step.png);background-repeat: no-repeat;padding-top: 40px;}
+.safety_step .fourStep ul .no {background-position: -796px top;}
+.safety_step .fourStep ul .one {background-position: 50px 0;}
+.safety_step .fourStep ul .two {background-position: -156px top;}
+.safety_step .fourStep ul .three {background-position: -365px top;}
+.safety_step .fourStep ul .four {background-position: -580px top;}
+
+.referer_box{ padding:50px 30px 30px 30px; height:50px }
+.referer_box .item{ background:url(../images/invite.gif) no-repeat 0 0; font-size:16px; font-weight:bolder; color:#00bef0; padding-left:60px; float:left; width:200px}
+.referer_box .item span{ display:block; height:22px; font-weight:normal; font-size:14px;  color:#555}
+.referer_box .referer_money{ background-position:0 -49px}
+
+.J_generationBtn{background:url(../images/generationBtn.png) no-repeat 0 0; width:162px; height:70px; display:inline-block; *display:inline;*display:block; line-height:1000px; overflow:hidden;}
+.J_nogenerationBtn{background:url(../images/nogenerationBtn.png) no-repeat 0 0; width:162px; height:70px; display:inline-block; *display:inline;*display:block; line-height:1000px; overflow:hidden;}

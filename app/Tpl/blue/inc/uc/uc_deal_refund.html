@@ -1,0 +1,179 @@
+<script type="text/javascript" src="{$TMPL}/js/jscharts_cr.js"></script>
+<?php
+$this->_var['ujs'][] = $this->_var['TMPL_REAL']."/js/u.js";
+$this->_var['cujs'][] = $this->_var['TMPL_REAL']."/js/u.js";
+?>
+<script type="text/javascript">
+function closeWeeboxs(){
+	$.weeboxs.close();
+}
+</script>
+<script type="text/javascript" src="{function name="parse_script" v="$ujs" c="$cujs"}"></script>
+<div class="list">
+	<div class="list_title clearfix">
+	<div {if $status eq 0}class="cur"{/if}><a href="{url x="index"r="uc_deal#refund" p="status=0"}">还款列表</a></div>
+	<div {if $status eq 1}class="cur"{/if}><a href="{url x="index"r="uc_deal#refund" p="status=1"}">已还清借款</a></div>
+</div>
+<div class="i_deal_list clearfix pl10 pr10 pt5 pb5">
+	{if $deal_list}
+	{if $status eq 1}
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr border="0" style="background-color:#00bef0; color:#fff; height:34px;">
+                <th>借款标题</th>
+	    		<th width="20%">金额</th>
+	    		<th width="10%">年利率</th>
+				<th width="8%">期限</th>
+				<th width="10%">完成度</th>
+				<th width="18%">发布日期</th>
+				<th width="8%">状态</th>
+	    </tbody>
+		{foreach from="$deal_list" item="deal" key=key}
+		<tr class="item {if $key mod 2 eq 1}item_1{/if}" {if $smarty.foreach.deal.last}style="border-bottom:0"{/if}>
+	        <td align="left">
+	            <div class="pl10"><a href="{$deal.url}">{$deal.name}</a></div>
+	        </td>
+	        <td>
+	        	{$deal.borrow_amount_format}
+	        </td>
+	        <td>
+	            {function name="number_format" v="$deal.rate" f="2"}%
+	        </td>
+	        <td>
+	            {$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}
+	        </td>
+	        <td>
+	        	<div class="graph-box">
+		            <p>
+	                    100%
+	                </p>
+	                <div id="graph-{$deal.id}"></div>
+				</div>
+                <script type="text/javascript">
+                    {if  $deal.deal_status eq 5}
+                    <!--//已还清-->
+                    var colors = ['#00bef0', '#e7e5e5'];
+                    var myData = new Array(['OK', 100], ['NO', 0]);
+                    {elseif $deal.deal_status eq 4}
+                    <!--//还款中-->
+                    var colors = ['#00bef0', '#e7e5e5'];
+                    var myData = new Array([' ', {function name='round' val=$deal.repay_progress_point f=2}], [' ', <?php echo 100-round($this->_var['deal']['repay_progress_point'],2) ?>]);
+                    {else}
+                    <!--//筹款中-->
+                    var colors = ['#00bef0', '#e7e5e5'];
+                    var myData = new Array([' ', {function name='round' val=$deal.progress_point f=2}], [' ', <?php echo 100-round($this->_var['deal']['progress_point'],2) ?>]);
+                    {/if}
+                    var myChart = new JSChart('graph-{$deal.id}', 'pie');
+                    myChart.setDataArray(myData);
+                    myChart.colorizePie(colors);
+                    myChart.setTitleColor('#8E8E8E');
+                    myChart.setTitleFontSize(0);
+                    myChart.setTextPaddingTop(280);
+                    myChart.setPieValuesDecimals(1);
+                    myChart.setPieUnitsFontSize(0);
+                    if($.browser.msie)
+                        myChart.setPieValuesFontSize(0);
+                    else
+                        myChart.setPieValuesFontSize(100000000);
+                    myChart.setPieValuesColor('#fff');
+                    myChart.setPieUnitsColor('#969696');
+                    myChart.setSize(46, 46);
+                    myChart.setPiePosition(0, 0);
+                    myChart.setPieRadius(23);
+                    myChart.setFlagColor('#1BB8E3');
+                    myChart.setFlagRadius(4);
+                    myChart.setTooltipOpacity(1);
+                    myChart.setTooltipBackground('#ddf');
+                    myChart.setTooltipPosition('ne');
+                    myChart.setTooltipOffset(2);
+                    myChart.draw();
+                </script>
+	        </td>
+	        <div class="f_l" style="width:100px">
+	        	{if $deal.publish_wait eq 1 || $deal.publish_wait eq 0}
+				<td>
+	                {function name="to_date" v="$deal.create_time" f="Y-m-d"}
+		            <br>
+	                 {function name="to_date" v="$deal.create_time" f="H:i"}
+	            </td>
+				{else}
+	            <td>
+	                {function name="to_date" v="$deal.start_time" f="Y-m-d"}
+	            		<br>
+	                 {function name="to_date" v="$deal.start_time" f="H:i"}
+	            </td>
+	            {/if}
+	        </div>
+				<td><a href="{url x="index" r="uc_deal#refdetail" p="id=$deal.id"}">详情</a></td>
+			</tr>
+		{/foreach}
+		<tbody>
+	</table>
+	{else}
+	{foreach from="$deal_list" item="deal"}
+	<div class="bid_item clearfix">
+        <div class="bid_title tl">
+        	<span class="f_l">{$deal.name}</span>
+            <span class="r_c"><a href="javascript:void(0);" onclick="openWeeboxFrame('{url x="index" r="uc_deal#contract" p="id=$deal.id"}','电子协议',1024,668);">查看电子协议</a></span>
+        </div>
+		<div class="blank0"></div>
+        <div class="bid_detail">
+            <div class="info">
+            	 借款金额：
+                <span class="f_red">{$deal.borrow_amount_format}</span>
+            </div>
+            <div class="info">
+            	年利率：
+                <span class="f_red">{function name="number_format" v=$deal.rate f=2}%</span>
+            </div>
+            <div class="info">
+            	期限：
+                <span class="f_red">{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</span>
+            </div>
+            <div class="info">
+            	{if $deal.loantype eq 2 || $deal.repay_time_type eq 0}还款日{else}下一还款日{/if}：
+                <span class="f_red">
+						{if $deal.loantype eq 2}
+						{function name="to_date" v=$deal.end_repay_time f="Y-m-d"}
+						{else}
+						{function name="to_date" v=$deal.next_repay_time f="Y-m-d"}
+						{/if}
+				</span>
+            </div>
+            <div class="info">
+            	月还款额：
+                <span class="f_red">{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$deal.true_month_repay_money f=2}</span>
+            </div>
+            <div class="info">
+            	罚息：
+                <span class="f_red">{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$deal.impose_money f=2}</span>
+            </div>
+			<div class="info">
+            	已还：
+                <span class="f_red">{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$deal.repay_money f=2}</span>
+            </div>
+            <div class="info">
+                <input class="refundBnt" type="button" onclick="window.location.href='{url x="index" r="uc_deal#quick_refund" p="id=$deal.id"}';">
+				{if $deal.generation_status eq 1}
+				<input class="nogenerationBtn" type="button" value="续约申请中" />
+				{elseif $deal.generation_status eq 2}
+				<input class="ygenerationBtn" type="button" value="续约成功" />
+				{elseif $deal.generation_status eq 3}
+				<input class="nogenerationBtn" type="button" value="续约失败" />
+				{elseif $deal.can_generation}
+				<input class="generationBtn" type="button" href="{url x="index" r="uc_deal#generation" p="id=$deal.id&is_ajax=1"}" />
+				{/if}
+                <!--{if !$deal.exceed_the_time}
+				<input class="inrepayBtn" type="button" onclick="window.location.href='{url x="index" r="uc_deal#inrepay_refund" p="id=$deal.id"}';">
+            	{/if}-->
+			</div>
+        </div>
+    </div>
+	{/foreach}
+	{/if}
+	{else}
+	<div class="tc p10">暂无记录</div>
+	{/if}
+	<div class="pages">{$pages}</div>
+</div>
+</div>

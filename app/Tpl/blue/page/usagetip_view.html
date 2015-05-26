@@ -1,0 +1,28 @@
+{include file="inc/header.html"} 
+<div class="blank"></div>
+	<div class="short f_l wb">
+		{include file="inc/usagetip/usa_right.html"}
+	</div>
+	<div class="long help_long wb f_r" style="width:878px;" >
+		<div class="clearfix ">
+			<div class="inc">
+				<div class="inc_main" style="padding:0 50px">
+					<div class="article_title f16 b tc pt20">
+			             {$article.title}
+					</div>
+					<div class="publish_time bbd pr">
+			            {function name="to_date" v=$article.create_time f="Y-m-d"}
+			            <div class="f_r ps" style="right:0; top:5px"><a href="javascript:window.history.back();">[返回]</a>&nbsp;&nbsp;<a href="{url x="index" r="usagetip"}">[全部文章]</a></div>
+			        </div>
+					<div class="article_info" style="padding-top: 30px;padding-bottom: 50px;">
+						{$article.content}
+					</div>
+				</div>
+				<div class="inc_foot"></div>
+			</div>
+			<div class="blank"></div>
+		</div>
+	</div>
+<div class="blank"></div>
+
+{include file="inc/footer.html"}

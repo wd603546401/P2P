@@ -1,0 +1,45 @@
+<p class="b" style="margin:30px 0 10px 0;">留言板</p>
+<div class="clearfix" style="padding:0 90px 0 90px;">
+	<div class="inc_top">{$post_title}</div>
+	<div class="inc_main">		
+	<form method="post" id="consult-add-form" action="{url x="index" r="msg#add"}"  onsubmit="return check_content(this);" name="message">
+		<div>
+			{if $user_info}					
+				<textarea name="content" rows="5" cols="60" class="f-textarea" style="width:100%"></textarea>
+				<div class="blank"></div>
+				
+				<p class="commit" style="float:right;">
+					<input type="hidden" value="1" name="ajax" />
+					<input type="hidden" value="{$rel_table}" name="rel_table">
+					<input type="hidden" value="{$rel_id}" name="rel_id">
+					<input type="submit" class="sub_btn f_r" name="commit" value="{$LANG.OK_POST}">
+					{if app_conf("VERIFY_IMAGE") eq 1}
+					<div class="commit  f_r">
+						<div class="verify_row">								
+						<input type="text" value="" class="f-input f-input60" style="width:45px" name="verify" />	
+						<img src="{$APP_ROOT}/verify.php?rand={function name="rand"}" onclick="this.src='{$APP_ROOT}/verify.php?rand='+ Math.random();" title="看不清楚？换一张" />			
+						</div>	
+					</div>
+					{/if}
+				</p>
+			{else}
+				{$message_login_tip}
+			{/if}
+		</div>
+						
+	</form>
+	</div>
+	<div class="inc_foot"></div>
+</div>
+
+<div class="blank"></div>
+
+<div class="clearfix" style="padding:0 90px 20px 90px;">
+	<div class="inc_main">		
+		
+		<div  class="message-list">
+		{function name='load_message_list'}
+		</div><!--end message-list-->		
+	</div>
+	<div class="inc_foot"></div>
+</div>

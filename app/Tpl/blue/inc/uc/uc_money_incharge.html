@@ -1,0 +1,239 @@
+<style type="text/css">
+	.ke-toolbar td{ padding:0}
+	.none_border{ margin-left:0!important}
+	.ke-container{ width:auto!important}
+</style>
+<div class="uc_r_bl">
+	<div class="inc_main">
+		<div class="list_title clearfix">
+			<div {if $ACTION_NAME eq 'index'}class="cur"{/if}>
+				<a href="{url x="index" r="uc_money#index"}">{$LANG.UC_LOGS}</a>
+			</div>
+			<div {if $ACTION_NAME eq 'incharge'}class="cur"{/if}>
+				<a href="{url x="index" r="uc_money#incharge"}">{$LANG.UC_MONEY_INCHARGE}</a>
+			</div>
+			<div {if $ACTION_NAME eq 'incharge_log'}class="cur"{/if}>
+				<a href="{url x="index" r="uc_money#incharge_log"}">{$LANG.UC_MONEY_INCHARGE_LOG}</a>
+			</div>
+			<div {if $ACTION_NAME eq 'carry'}class="cur"{/if}>
+				<a href="{url x="index" value="uc_money#carry"}">{$LANG.UC_CARRY}</a>
+			</div>
+			<div {if $ACTION_NAME eq 'carry_log'}class="cur"{/if}>
+				<a href="{url x="index" value="uc_money#carry_log"}">提现日志</a>
+			</div>
+		</div>
+		<div class="u_incharge uc_r_bl_box clearfix pt10">
+			<div class="prompt">
+				<p><i></i>所有投标保证金将由第三方平台托管。</p>
+				<p><i></i>即时充值所产生的转账费用，以100元为上限，按转账金额0.5%，由第三方平台收取。</p>
+				<p><i></i>请注意您的银行卡充值限制，以免造成不便。 <br> <i></i>如果充值金额没有及时到账，请和客服联系。</p>
+			</div>
+			<div class="blank1"></div>
+			
+			<div  class="uc-table">
+				<form name="incharge_form" id="incharge_form" action="{url x="index" r="uc_money#incharge_done"}" method="post" />			
+					<div class="sect cf">			
+						<div class="bdl clearfix">
+						
+							{if $below_payment || app_conf("OPEN_IPS") eq 1}
+							<div class="way clearfix">
+								<div  class="t_name f_l w90">充值方式：</div>
+								<label class="f_l"><input type="radio" class="f-check" checked="checked" onclick="SelectPayType(0);" name="check_ol_bl_pay" />线上支付</label>
+								{if $below_payment}<label class="f_l"><input type="radio" class="f-check" onclick="SelectPayType(1);" name="check_ol_bl_pay" />线下支付</label>{/if}
+								{if app_conf("OPEN_IPS") eq 1}<label class="f_l"><input type="radio" class="f-check" onclick="SelectPayType(2);" name="check_ol_bl_pay" />第三方托管</label>{/if}
+							</div>
+							{/if}		
+							
+							<div class="m_number clearfix">				        	        	
+					        	<div class="t_name f_l w80" style="float:left;">充值{$LANG.PRICE_AMOUNT}：</div>
+								<input type="text" class="f-input f_l" id="money" name="money" />元
+							</div>
+							
+							<div class="clearfix" id="J_belows_pay"  style=" border-bottom:1px dashed #e3e3e3;  display:none; overflow:hidden; padding:0 20px; margin-top: 6px;">				        	        	
+					        	<div class="t_name f_l w80" style="float:left;">上传凭证：</div>
+								
+								<div style="display: table-caption; margin-left: 14px; width: 300px;" id="xxxx">	
+								
+								<link rel="stylesheet" href="{$APP_ROOT}/admin/public/kindeditor/themes/default/default.css" />
+								<script type='text/javascript'  src='{$APP_ROOT}/admin/public/kindeditor/kindeditor.js'></script>
+								<script type="text/javascript" src="{$APP_ROOT}/admin/public/kindeditor/lang/zh_CN.js"></script>
+								<script type="text/javascript">
+									var VAR_MODULE = "m";
+									var VAR_ACTION = "a";
+									var ROOT = '{$APP_ROOT}/file.php';
+									var ROOT_PATH = '{$APP_ROOT}';
+									var MAX_FILE_SIZE = "<?php echo (app_conf("MAX_IMAGE_SIZE")/1000000)."MB"; ?>";
+								</script>
+									{function name="show_ke_image" v="pingzheng"}
+								</div>	
+							</div>
+							
+							
+							<div class="J_online">
+								<div  id="J_online_pay" class="clearfix" >		
+									<div class="f_l  w90">充值接口：</div>		
+									<div class="f_l" style="width:720px">							
+									{foreach from=$payment_list item=payment_item}									
+										{$payment_item.display_code}	
+										<div class="blank"></div>										
+									{/foreach}
+									</div>		
+								</div>
+								{if $below_payment}
+								
+								<div  id="J_below_pay" class="clearfix" style="text-align: left; display:none;">
+									
+									{$below_payment.display_code}	
+									<div class="blank"></div>		
+								</div>
+								{/if}
+								{if app_conf("OPEN_IPS") eq 1}
+								<div id="J_ips_pay" class="clearfix" style="text-align: left; display:none;">
+									<div class="f_l  w90">充值接口：</div>		
+									<div class="f_l bankbox" style="width:720px">		
+									loading...
+									</div>
+								</div>
+								{/if}
+								<div class="pay_btn">
+									<input type="submit" id="incharge_done" value="确定{$LANG.DO_INCHARGE}" class="sub_btn">
+								</div>
+							</div>
+						</div>	
+							
+					</div><!--end sect-->
+				</form>
+			</div>				
+		</div>
+		
+	</div>
+	<div class="inc_foot"></div>
+</div>
+<script type="text/javascript">
+	var payType = 0;
+	{if $below_payment || app_conf("OPEN_IPS") eq 1}
+	function SelectPayType(i){
+		payType = 0;
+		switch(i){
+			case 0:
+				$("#J_online_pay").show();
+				$("#J_below_pay").hide();
+				$("#J_ips_pay").hide();
+				$("#J_belows_pay").hide();
+				break;
+			case 1:
+				$("#J_online_pay").hide();
+				$("#J_below_pay").show();
+				$("#J_ips_pay").hide();
+				$("#J_belows_pay").show();
+				break;
+			case 2:
+				payType = 1;
+				$("#J_online_pay").hide();
+				$("#J_below_pay").hide();
+				$("#J_ips_pay").show();
+				$("#J_belows_pay").hide();
+				ajaxGetBankList();
+				break;
+		}
+	}
+	{/if}
+	$(document).ready(function(){
+		$("#incharge_done").click(function(){
+			if(!($("input[name='money']").val()!='' && !isNaN($("input[name='money']").val())&&$("input[name='money']").val()>0))			
+			{
+				$.showErr("{$LANG.PLEASE_INPUT_CORRECT_INCHARGE}",function(){
+					$("input[name='money']").focus();
+				});
+				return false;
+			}
+			else if(!$("input[name='payment']:checked").val())
+			{
+				$.showErr("{$LANG.PLEASE_SELECT_PAYMENT}");
+				return false;
+			}
+			
+			if(payType==1){
+				window.location.href = APP_ROOT+"/index.php?ctl=collocation&act=DoDpTrade&user_type=0&user_id={$user_info.id}&pTrdBnkCode="+$("input[name='payment']:checked").val()+"&pTrdAmt="+$("input[name='money']").val()+$("input[name='money_incharge_files']").val();
+				return false;
+			}
+			return true;
+		});
+	});
+	
+	{if app_conf("OPEN_IPS") eq 1}
+	function ajaxGetBankList(){
+		if($.trim($("#J_ips_pay .bankbox").html())=="loading..."){
+			$.ajax({
+				url:APP_ROOT + "/index.php?ctl=collocation&act=GetBankList",
+				dataType:"json",
+				success:function(result){
+					if(result.pErrCode=="0000")
+					{
+						var html="";
+						$.each(result.BankList,function(i,data){
+							html += '<div style="float:left;"><input type="radio" name="payment" value="'+data.id+'">&nbsp;'+data.name+'：</div>';
+							html += '<div style="float:left; padding-left:10px;">'+data.sub_name+'</div>';
+							html += '<div class="blank"></div>';
+						});
+						$("#J_ips_pay .bankbox").html(html);
+					}
+					else{
+						$.showErr(result.pErrMsg);
+					}
+				},
+				error:function(){
+					$.showErr("请求数据失败");
+				}
+			});
+		}
+	}
+	
+	{/if}
+	
+	
+	function upd_file(obj,file_id,uid)
+	{	
+		$("input[name='"+file_id+"']").bind("change",function(){			
+			$(obj).hide();
+			$(obj).parent().find(".fileuploading").removeClass("hide");
+			$(obj).parent().find(".fileuploading").removeClass("show");
+			$(obj).parent().find(".fileuploading").addClass("show");
+			  $.ajaxFileUpload
+			   (
+				   {
+					    url:APP_ROOT+'/index.php?ctl=uc_money&act=money_upload&uid='+uid,
+					    secureuri:false,
+					    fileElementId:file_id,
+					    dataType: 'json',
+					    success: function (data, status)
+					    {
+					   		$(obj).show();
+					   		$(obj).parent().find(".fileuploading").removeClass("hide");
+							$(obj).parent().find(".fileuploading").removeClass("show");
+							$(obj).parent().find(".fileuploading").addClass("hide");
+					   		if(data.status==1)
+					   		{
+					   			document.getElementById("money_incharge").src = data.middle_url+"?r="+Math.random();
+					   		}
+					   		else
+					   		{
+					   			$.showErr(data.msg);
+					   		}
+					   		
+					    },
+					    error: function (data, status, e)
+					    {
+							$.showErr(data.responseText);;
+					    	$(obj).show();
+					    	$(obj).parent().find(".fileuploading").removeClass("hide");
+							$(obj).parent().find(".fileuploading").removeClass("show");
+							$(obj).parent().find(".fileuploading").addClass("hide");
+					    }
+				   }
+			   );
+			  $("input[name='"+file_id+"']").unbind("change");
+		});	
+	}
+
+</script>

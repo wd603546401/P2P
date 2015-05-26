@@ -1,0 +1,39 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="main">
+<div class="main_title">{$main_title}</div>
+<div class="blank5"></div>
+
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		<input type="button" class="button" value="{%FOREVERDEL}" onclick="foreverdel();" />
+	
+		<input type="hidden" value="Message" name="m" />
+		<input type="hidden" value="index" name="a" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="message" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+	,title:{%TITLE}
+	,create_time|to_date:{%MESSAGE_CREATE_TIME}|140px
+	,update_time|to_date:{%MESSAGE_REPLY_TIME}|140px
+	,user_id|get_user_name:{%USER_NAME}|120px
+	,is_effect|get_message_is_effect:{%MESSAGE_IS_EFFECT}|70px
+	" 
+	actionlist="edit:{%VIEW},foreverdel:{%FOREVERDEL}"
+	actionwidth="150px;" /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

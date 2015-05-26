@@ -1,0 +1,109 @@
+<script type="text/javascript" src="{$TMPL}/js/jscharts_cr.js"></script>
+<div class="list">
+	<div class="list_title clearfix">
+		<div class="cur"><a href="{url x="index" r="manageagency#agencydeal"}">{$page_title}</a></div>
+	</div>
+	<div class="list_cont">
+		<div class="i_deal_list clearfix">
+			{if $list}
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr  border="0" style="background-color:#00bef0; color:#fff; height:34px;">
+						<th width="20%">借款标题</th>
+						<th>借款目的</th>
+						<th>借款金额</th>
+						<th>年率</th>
+						<th>借款进度</th>
+						<th>借款期限</th>
+						<th>担保金额</th>
+						<th>担保类型</th>
+					</tr>
+					{foreach from=$list item="item" key=key}
+					<tr class="item {if $key mod 2 eq 1}item_1{/if}" {if $smarty.foreach.deal.last}style="border-bottom:0"{/if}>
+						<td align="left">
+							<div class="pl10">
+							<a href="{url x="index" r="deal" p="id=$item.id"}">
+	                       		<a href="{url x="index" r="deal" p="id=$item.id"}">{$item.name}</a>
+	                   	 	</a>
+							</div>
+						</td>
+						<td>
+	                    	{$item.type_info.name}
+						</td>
+						<td>
+							{$item.borrow_amount_format}
+						</td>
+						<td>
+	                        {function name="number_format" v="$item.rate" f="2"}%
+						</td>
+						<td>
+							<div class="graph-box">
+								<p>
+									{if  $item.deal_status eq 5}
+									100%
+									{elseif $item.deal_status eq 4}
+									{function name='round' v='$item.repay_progress_point' f=0}%
+									{else}
+									{function name="round" v=$item.progress_point f=0}%
+									{/if}
+								</p>
+		                    	<div id="graph-{$item.id}"></div>
+							</div>
+							<script type="text/javascript">
+							  	{if  $item.deal_status eq 5}
+								<!--//已还清-->
+								var colors = ['#00bef0', '#e7e5e5'];
+								var myData = new Array(['OK', 100], ['NO', 0]);
+								{elseif $item.deal_status eq 4}
+								<!--//还款中-->
+								var colors = ['#00bef0', '#e7e5e5'];
+								var myData = new Array([' ', {function name='round' val=$item.repay_progress_point f=2}], [' ', <?php echo 100-round($this->_var['item']['repay_progress_point'],2) ?>]);
+								{else}
+								<!--//筹款中-->
+								var colors = ['#00bef0', '#e7e5e5'];
+								var myData = new Array([' ', {function name='round' val=$item.progress_point f=2}], [' ', <?php echo 100-round($this->_var['item']['progress_point'],2) ?>]);
+								{/if}
+								var myChart = new JSChart('graph-{$item.id}', 'pie');
+								myChart.setDataArray(myData);
+								myChart.colorizePie(colors);
+								myChart.setTitleColor('#8E8E8E');
+								myChart.setTitleFontSize(0);
+								myChart.setTextPaddingTop(280);
+								myChart.setPieValuesDecimals(1);
+								myChart.setPieUnitsFontSize(0);
+								if($.browser.msie)
+									myChart.setPieValuesFontSize(0);
+								else
+									myChart.setPieValuesFontSize(100000000);
+								myChart.setPieValuesColor('#fff');
+								myChart.setPieUnitsColor('#969696');
+								myChart.setSize(46, 46);
+								myChart.setPiePosition(0, 0);
+								myChart.setPieRadius(23);
+								myChart.setFlagColor('#1BB8E3');
+								myChart.setFlagRadius(4);
+								myChart.setTooltipOpacity(1);
+								myChart.setTooltipBackground('#ddf');
+								myChart.setTooltipPosition('ne');
+								myChart.setTooltipOffset(2);
+								myChart.draw();
+							</script>							
+						</td>
+						<td>
+							{$item.repay_time}{if $item.repay_time_type eq 0}天{else}个月{/if}
+						</td>
+						<td>
+							{function name="format_price" item="$item.guarantor_amt"}
+						</td>
+						<td>{if $item.warrant eq 1}本金{elseif $item.warrant eq 2}本息{else}无{/if}</td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+			<div class="pages">{$pages}</div>
+			{else}	
+			<div align="center" style="padding:20px 0">暂无记录</div>
+			{/if}
+		</div>
+	</div>
+</div>

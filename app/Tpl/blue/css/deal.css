@@ -1,0 +1,153 @@
+.f_18 {
+font-size: 18px;
+}
+.f_red {
+color: #FF4E00;
+}
+.f_gray {
+color: #8B8A8A;
+}
+.clearfix_list { line-height:40px; overflow:hidden; }
+.clearfix_list p {  width:24.5%}
+.clearfix_list span { padding-left:5px; }
+.clearfix_list table{ border:1px solid #e3e3e3; }
+.clearfix_list table tr{ border:1px solid #e3e3e3; }
+.cont{ border-top:none; padding:30px; }
+.cont1{ padding-top:0; }
+.cont1 span{ line-height:30px; }
+.cont2{ padding-bottom:0; }
+.clearfix_list table td,.clearfix_list table th{ text-align:center; }
+.cont p.b { color:#222; font-size:18px; font-weight:normal; }
+.prompt i{ background:url(../images/prompt.gif) no-repeat; display:inline-block; height:5px; margin:7px 10px 0 0; vertical-align:top; width:5px; }
+.right_tab_select {
+	border-top: 3px solid #00bef0;
+	color: #00bef0;
+	height: 45px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: 'Microsoft Yahei','黑体';
+	float:left;
+}
+.right_tab_unselect {
+	height: 48px;
+	line-height: 45px;
+	text-align: center;
+	font-size: 13px;
+	color: #8E8E8E;
+	font-family: 'Microsoft Yahei','黑体';
+	float: left;
+}
+.tab_interval_green {
+	height: 3px;
+	background: #729B17;
+	font-size: 1px;
+}
+
+#deal-default .title{background: url("../images/blue_title.png") repeat-x;
+border-left: 1px solid #ccc;
+border-right: 1px solid #ccc;
+height: 35px;
+line-height: 36px;
+margin: 0 auto;
+padding: 0 10px;
+padding-right:0;
+color: #3a3a3a;
+font-size: 12px;
+font-weight:bolder;}
+
+#deal-default .title .return{color:#565656;background: url("../images/yellow_title.png") repeat-x; width:137px; padding-right:10px}
+#deal-default .title .return a{color:#565656; font-weight:normal;}
+#deal-intro{}
+
+#deal-intro .pic-box{width:233px}
+#deal-intro .pic-box .pic{ border:1px solid #ccc; padding:15px}
+#deal-intro .detail{ width:546px; padding:0 6px;
+border: 1px solid #ccc;}
+
+.detail .detail_title_bg {
+height: 39px;
+line-height: 39px;
+border-bottom:1px dotted #B9B9B9
+}
+
+.detail .detail_title {
+float: left;
+padding: 0 6px;
+color: #333;
+font-size: 14px;
+font-weight:bolder;
+}
+.detail .detail_number {
+	float: right;
+	padding-right: 10px;
+	font-size:12px;
+	color:#A2A2A2;
+}
+
+.detail .cont {
+	background-color: white;
+	border:none;
+	color:#5C5B5B
+}
+
+.detail .items .item{width: 160px; height: 30px; line-height: 30px}
+
+.t_user_face{border: 1px solid #CCC; background:#fff; padding:10px; width:126px; height:262px}
+.t_user_face .u_hd{color: #333;
+font-size: 13px;
+font-weight: 600;
+text-align: center;
+padding: 0 0 5px 0;
+}
+.t_user_face .u_name a{font-weight:normal;}
+.user_face{ height:80px}
+.user_face img{ height:64px; width:64px; border:1px solid #ccc; background:#fff; padding:2px}
+.t_user_face img{ position:relative; top:5px}
+.t_user_face .row{height:24px; line-height:24px;}
+
+
+.beleader {
+	margin-bottom: 100px;
+}
+.toptitle {
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #144BC5;
+	font-family: 'Microsoft Yahei', '黑体';
+}
+.line950 {
+	background: url("../images/line950.gif") no-repeat center center;
+	height: 8px;
+}
+.licaiuser {
+	background: url("../images/licaiuser.jpg") no-repeat;
+	border: 0 none;
+	text-indent: -9999px;
+	width: 129px;
+	height: 34px;
+	cursor: pointer;
+}
+
+.beleader .beleader_cen .left {
+width: 470px;
+padding-left: 100px;
+}
+
+.bid-table{ border:1px solid #BFE6F9}
+.bid-table td{ padding:0 5px; height:36px; line-height:36px; border-bottom:1px solid #BFE6F9}
+.bid-table td.tit{ border-right:1px solid #BFE6F9; background:#E0F3FC}
+.bid-table td.bg{ background:#E0F3FC;}
+.bid-table td.btm{ border-bottom:none;}
+.bid_act_box{ padding-left:83px; border-top:1px solid #E3E1E2; background:url(../images/bid_sure_bg.jpg) repeat-x 0 0; height:89px}
+.bid_submit_button{ cursor:pointer;  border:none; background:url(../images/submit_sure.png) no-repeat 0 0; width:142px; height:58px; padding-top:58px; overflow:hidden}
+.list_title .list1{border-right: 1px solid #e3e3e3;
+float: left;
+font-size: 16px;
+padding: 0 30px;
+cursor: pointer;}
+.c_passed a:hover{ color:#FF4E00 }

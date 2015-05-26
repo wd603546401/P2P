@@ -1,0 +1,121 @@
+<style type="text/css">
+	#J_calculate_form .f-input,.f-select-s{ border:1px solid #ccc; background:#fff; height:28px;padding:5px 10px; width:120px; border-radius: 5px!important; font-size:14px; font-weight:bolder;color:#666}
+	#J_calculate_form .f-select-s h3{ font-size:14px; display:block; height:28px; line-height:28px; overflow:hidden;}
+	#J_calculate_form .f-select-s .dropdown{  left:0; padding-top:0px; border:1px solid #ddd; background:#fff; width:150px}
+	#J_calculate_form .f-select-s .dropdown a{ display:block; background:#fff; padding:0 8px; height:32px; line-height:32px; font-weight:normal;}
+	#J_calculate_form .f-select-s .dropdown a:hover{ background:#f1f1f1}
+	#J_calculate_form .sub_btn{color: #fff;background-color: #0697da; border:none;border-radius: 5px!important;height: 40px!important;width: 165px!important;line-height: 40px;}
+</style>
+<div class="list" style="overflow:visible;">
+	<div class="list_title clearfix">
+		<div class="cur">借款设置</div>
+	</div>
+	<div class="p10 cf" style="border-top:0">
+		
+		<div class="blank10"></div>
+		<div class="cf pt5 pb5 pl5 pr5">
+			<form action="{$APP_ROOT}" method="post" name="J_calculate_form" id="J_calculate_form">
+			<div class="p5" style="width:800px;line-height:40px">
+	            <div class="clearfix">
+	                <div class="f_l" style="width:400px">
+	                	<span class="f_l">借款金额：</span><input type="text" id="borrowAmount" name="borrowamount" class="f-input f_l mr5">元
+	                </div>
+	                <div class="f_l" style="width:400px">
+	                	 <span class="f_l">年&nbsp;&nbsp;利&nbsp;&nbsp;率：</span><input type="text" id="apr" name="apr" class="f-input f_l mr5">%
+	                </div>
+					<div class="blank20"></div>
+	                <div class="f_l" style="width:400px">
+	                	 <span class="f_l"> 借款期限：</span><input type="text" id="repayTime" name="repaytime" class="f-input f_l mr5">个月
+	                </div>
+	                <div class="f_l" style="width:400px">
+	                	<span class="f_l">还款方式：</span><div class="f-select-s f_l pr" id="borrowpay-box">
+	                		<h3></h3>
+							<div class="dropdown hide ps"></div>
+	                	</div>
+						<select class="hide" name="borrowpay" id="borrowpay">
+	                        <option value="0">等额本息</option>
+							<option value="1">每月付息，到期还本</option>
+							<option value="2">到期还本息</option>
+	                    </select>
+	                </div>
+	            </div>
+				<div class="blank10"></div>
+	            <div class="clearfix">
+	                <div class="" style="margin:0;width:200px">
+	                    <input type="checkbox" name="isshow" value="1" checked="checked" id="isShow">&nbsp;&nbsp;显示还款时间表&nbsp;&nbsp;&nbsp;
+	                </div>
+	                <div style="padding:10px 0 0 0">
+	                    <button class="sub_btn" id="J_saveSettingBnt" type="button">
+	                    	开始计算
+	                    </button>
+						<span style="color: red" id="T_error"></span>
+	                </div>
+	            </div>
+	        </div>
+			</form>
+		</div>
+		<div class="blank20"></div>
+		
+	</div>
+</div>
+
+<div id="J_calculate_Result"></div>
+
+<script type="text/javascript">
+	var h = 1;
+	jQuery(function(){
+		$("#borrowpay option").each(function(){
+			if (h == 1) {
+				$("#borrowpay-box h3").html($(this).html());
+			}
+			$("#borrowpay-box .dropdown").append("<div rel='"+$(this).attr("value")+"'><a href='javascript:void(0);'>"+$(this).html()+"</a></div>");
+			h++;
+		});
+		
+		$("#borrowpay-box h3").click(function(){
+			$("#borrowpay-box .dropdown").removeClass("hide");
+			$("body").one("click",function(){
+				$("#borrowpay-box .dropdown").addClass("hide");
+			});
+			return false;
+		});
+		$("#borrowpay-box .dropdown a").click(function(){
+			$("#borrowpay-box h3").html($(this).html());
+			var v = $(this).parent().attr("rel");
+			$("#borrowpay").val(parseInt(v));
+			$("#borrowpay-box .dropdown").addClass("hide");
+		});
+		
+		$("#J_saveSettingBnt").click(function(){
+			$("#borrowpay-box .dropdown").addClass("hide");
+			$("#T_error").html("");
+			if($.trim($("#borrowAmount").val())=="" || $("#borrowAmount").val()%1 !=0){
+				$("#T_error").html("借款金额必须为正整数!");
+				return false;
+			}
+			if($.trim($("#apr").val())=="" || isNaN($.trim($("#apr").val()))){
+				$("#T_error").html("年利率必须为数字类型!");
+				return false;
+			}
+			if($.trim($("#repayTime").val())=="" || isNaN($.trim($("#repayTime").val()))){
+				$("#T_error").html("月份格必须为数字类型!");
+				return false;
+			}
+			if($.trim($("#repayTime").val())>120){
+				$("#T_error").html("月份必须在120以内!");
+				return false;
+			}
+			var query = $("#J_calculate_form").serialize();
+			$.ajax({
+				url:APP_ROOT + "/index.php?ctl=tool&act=ajax_calculate",
+				data:query,
+				type:"post",
+				success:function(result){
+					$("#J_calculate_Result").html(result);
+					return false;
+				}
+			});
+			return false;
+		});
+	});
+</script>

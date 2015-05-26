@@ -1,0 +1,151 @@
+.f_18 {
+font-size: 18px;
+}
+.f_red {
+color: #FF4E00;
+}
+.f_gray {
+color: #8B8A8A;
+}
+
+.clearfix_list { line-height:40px; overflow:hidden; }
+.clearfix_list p {  width:24.5%}
+.clearfix_list span { padding-left:5px; }
+.clearfix_list table{ border:1px solid #e3e3e3; }
+.clearfix_list table tr{ border:1px solid #e3e3e3; }
+.cont_t{ font-size:14px; font-weight:bold; line-height:50px; height:50px; padding-top:20px}
+.cont_l{ width:65%;border-right:1px solid #e3e3e3; padding-right:20px;}
+.cont_r{ width:31%; }
+.cont_r .contact{ font-size:14px;}
+.cont_r .transmoney .f_red{ font-size:20px; font-weight:bolder; font-family:Arial; }
+
+.cont_r .m_info{ width:70%}
+
+.cont_r .u_money_info{ width:30%; padding-top:100px}
+
+.cont_r .tans_user{ border-top:1px solid #ddd; margin-top:15px}
+.cont_r .tans_user a{font-size:16px;font-weight:bolder;  }
+.tbuy_btn{ display:block; text-decoration:none; border-radius:5px; background:#f60; height:36px; line-height:36px; font-size:14px; color:#fff; font-weight:bolder;}
+.tbuy_btn:hover{ text-decoration:none; background:#f70; color:#fff}
+.dtbuy_btn{ display:block; text-decoration:none; border-radius:5px; background:#ccc; height:36px; line-height:36px; font-size:14px; color:#fff; font-weight:bolder;}
+
+.right_tab_select {
+	border-top: 3px solid #00bef0;
+	color: #00bef0;
+	height: 45px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: 'Microsoft Yahei','黑体';
+	float:left;
+}
+.right_tab_unselect {
+	height: 48px;
+	line-height: 45px;
+	text-align: center;
+	font-size: 13px;
+	color: #8E8E8E;
+	font-family: 'Microsoft Yahei','黑体';
+	float: left;
+}
+.list1{ border-right: 1px solid #e3e3e3;
+float: left;
+font-size: 16px;
+padding: 0 30px;
+cursor: pointer; }
+.tab_interval_green {
+	height: 3px;
+	background: #729B17;
+	font-size: 1px;
+}
+
+#deal-default{ font-family:"Microsoft YaHei"; }
+#deal-default .title{background: url("../images/blue_title.png") repeat-x;
+border-left: 1px solid #ccc;
+border-right: 1px solid #ccc;
+height: 35px;
+line-height: 36px;
+margin: 0 auto;
+padding: 0 10px;
+padding-right:0;
+color: #3a3a3a;
+font-size: 12px;
+font-weight:bolder;}
+
+#deal-default .title .return{color:#565656;background: url("../images/yellow_title.png") repeat-x; width:137px; padding-right:10px}
+#deal-default .title .return a{color:#565656; font-weight:normal;}
+#deal-intro{}
+
+#deal-intro .pic-box{width:233px}
+#deal-intro .pic-box .pic{ border:1px solid #ccc; padding:15px}
+#deal-intro .detail{padding:15px;}
+
+.detail .detail_title_bg {
+line-height: 40px;
+}
+
+.detail .detail_title {
+float: left;
+padding: 0 6px 0 0;
+color: #333;
+font-size: 24px;
+font-weight:bolder;
+}
+.detail .detail_number {
+	float: right;
+	padding-right: 10px;
+	font-size:12px;
+	color:#A2A2A2;
+}
+
+.detail .cont {
+	background-color: white;
+	border:none;
+	color:#5C5B5B
+}
+.detail .items_no {border-top: none!important }
+.detail .items {border-top: 1px dotted #eee; }
+.detail .items .item{width: 50%; height: 50px; line-height: 50px}
+.detail .items_big .item{height: 46px; line-height: 46px}
+.detail .items .item .lt{ float:left; width:40%}
+.detail .items .item .lb{ float:left; width:60%}
+
+.beleader {
+	margin-bottom: 100px;
+}
+.toptitle {
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #144BC5;
+	font-family: 'Microsoft Yahei', '黑体';
+}
+.line950 {
+	background: url("../images/line950.gif") no-repeat center center;
+	height: 8px;
+}
+.licaiuser {
+	background: url("../images/licaiuser.jpg") no-repeat;
+	border: 0 none;
+	text-indent: -9999px;
+	width: 129px;
+	height: 34px;
+	cursor: pointer;
+}
+
+.beleader .beleader_cen .left {
+width: 470px;
+padding-left: 100px;
+}
+
+.bid-table{ border:1px solid #8A8D90}
+.bid-table td{ padding:0 5px; height:30px; line-height:30px; border-bottom:1px solid #DBE0E4}
+.bid-table td.tit{ border-right:1px solid #DBE0E4; background:#EEF4FD}
+.bid-table td.bg{ background:#EEF4FD;}
+.bid-table td.btm{ border-bottom:none;}
+.bid_act_box{ padding-left:83px; border-top:1px solid #E3E1E2; background:url(../images/bid_sure_bg.jpg) repeat-x 0 0; height:89px}
+.bid_submit_button{ cursor:pointer; text-indent:-100em; border:none; background:url(../images/submit_sure.png) no-repeat 0 0; width:142px; height:58px}
+

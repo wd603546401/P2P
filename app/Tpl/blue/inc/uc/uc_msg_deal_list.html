@@ -1,0 +1,85 @@
+<?php
+$this->_var['pmjs'][] = $this->_var['TMPL_REAL']."/js/writepm.js";
+$this->_var['cpmjs'][] = $this->_var['TMPL_REAL']."/js/writepm.js";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$pmjs" c="$cpmjs"}"></script>
+<div class="list_title clearfix">
+	<div><a href="{url x="index" r="uc_msg#index"}">{$LANG.UC_NOTICE}</a></div>
+	<div class="cur"><a href="{url x="index" r="uc_msg#index" p="mtype=private"}">{$LANG.UC_PRIVATE_MSG}</a></div>
+</div>
+<div class="inc uc_r_bl_box clearfix">
+	<div class="inc_top pl10"><a href="{url x="index" r="uc_msg#index" p="mtype=private"}">返回所有私信</a> > 我与{$dest_user_name}共有{$count}封交流信件</div>
+	<div class="inc_main">
+		<!--msg_list-->
+		<div class="uc-table">
+		<div class="blank"></div>
+		<form name="pm_list">
+		<table style="width:100%" cellspacing="0" cellpadding="0" border="0" class="uc-msg-table" >
+			{foreach from=$msg_list item=pm key=key}
+			<tr class="pm_row {if $key mod 2 eq 0}pm_row_1{/if}">
+				<td style="width:56px">
+					{if $pm.system_msg_id eq 0}
+						{if $pm.to_user_id eq $user_info.id}
+						{function name="show_avatar" v=$pm.from_user_id t="small"}
+						{/if}
+						{if $pm.from_user_id eq $user_info.id}
+						{function name="show_avatar" v=$pm.to_user_id t="small"}
+						{/if}
+					{/if}{*头像*}
+				</td>
+				<td style="text-align:left;">
+					{if $pm.type eq 0 and $pm.is_read eq 0}<span class="new_pm"></span>{/if}
+					{if $pm.system_msg_id neq 0}{$LANG.SYSTEM_PM}:
+					{$pm.title}
+					{/if}
+					{if $pm.system_msg_id eq 0}		
+						{if $pm.from_user_id eq $user_info.id}{$LANG.I}{else}{function name="get_user_name" v=$pm.from_user_id s="0"}{/if}
+						{$LANG.SAYTO}
+						{if $pm.to_user_id eq $user_info.id}{$LANG.I}{else}{function name="get_user_name" v=$pm.to_user_id s="0"}{/if}
+						{$LANG.SAY}：				
+					{/if}
+					<br />				
+					{function name="nl2br" v=$pm.content}					
+				</td>
+				<td width=100 style="text-align:right;">	
+					<div class="clearfix" style="text-align:right"><input type="checkbox" value="{$pm.id}" name="id[]"/>删除</div>	
+					{function name="pass_date" v=$pm.create_time}
+				</td>
+			</tr>				
+			{/foreach}
+		</table>
+		</form>
+		<div class="pt10" style="float:right">
+		{$LANG.SELECT_ALL}<input type="checkbox" name="checkall" />
+		</div>
+		<div style="float: right; text-align: right; width: 100%;">
+		<input type="button" value="{$LANG.DELETE}" name="del_pm" class="remove_msg_btn" />
+		</div>				
+		<div class="blank"></div>
+		
+		<div class="pages" style="padding:0px; margin:0px;">{$pages}</div>
+		</div><!--end uc-table-->
+		<!--end msg_list-->	
+		
+		
+		<div class="blank"></div>
+		
+			<input type="hidden" value="{$dest_user_name}" name="user_name" />
+			<div class="field" style="width:700px;">
+				<label>{$LANG.CONTENT}</label>
+				<textarea style="width:450px; height:100px; border:#ccc solid 1px;" cols="10" name="content"></textarea>
+			</div>
+			<div class="field" style="width:700px;">		
+				<label></label>	
+				<input type="button" value="{$LANG.DO_SEND}" name="commit" id="settings-submit" class="sub_btn" onclick="do_reply_pm();" />
+			</div>
+		
+		<div class="blank"></div>	
+				
+	</div>
+	
+	<div class="inc_foot"></div>
+	
+
+</div>
+

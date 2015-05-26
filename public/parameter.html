@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Generator" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>电子合同-参数说明</title>
+<style type="text/css">
+	.item{ border:1px solid #ddd; margin-bottom:5px;}
+	.item .tit{ font-weight:bolder; padding:6px;}
+	.item .code{ padding: 3px 6px 6px 6px; background:#f9f9f9; border-top:1px solid #ddd; border-bottom:1px solid #ddd }
+	.item .desc{ padding: 3px 6px 6px 6px; }
+</style>
+</head>
+<body style="padding:8px;margin:0">
+	<div style="font-size:14px">
+		<div class="item">
+			<div class="tit">{$deal.id}</div>
+			<div class="desc">
+			借款编号
+			</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="app_conf" v="SITE_TITLE"}</div>
+			<div class="desc">网站名</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="app_conf" v="CURRENCY_UNIT"}</div>
+			<div class="desc">货币符号</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="number_format" v=$loan.get_repay_money f=2}</div>
+			<div class="desc">格式化数字{function name="number_format" v="参数" f="保留多少小数点"}</div>
+		</div>
+		<div class="item">
+			<div class="tit">{$deal.borrow_amount}</div>
+			<div class="desc">总的借款</div>
+		</div>
+		<div class="item">
+			<div class="tit">以下为输出借款人列表的代码</div>
+			<div class="code">
+				&lt;table border="1" style="margin: 0px auto; border-collapse: collapse; border: 1px solid rgb(0, 0, 0); width: 70%; "><br>
+				&nbsp;&nbsp;&lt;tr><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> {function name="app_conf" v="SITE_TITLE"}用户名&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 借出金额&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;">借款期限&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{if $deal['loantype'] == 0}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 每月应收本息&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{elseif $deal['loantype'] == 1}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 每月应收利息&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 到期还本金&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{elseif $deal['loantype'] == 2}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 到期还本息&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{/if}<br>
+				&nbsp;&nbsp;&lt;/tr><br>
+				&nbsp;&nbsp;{foreach from="$loan_list" item="loan"}<br>
+				&nbsp;&nbsp;&lt;tr><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td  style="text-align:center;">{$loan.user_name}&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td  style="text-align:right;padding-right:10px">{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$loan.money f=2}&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td  style="text-align:center;">{$deal.repay_time}个月&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td  style="text-align:right;padding-right:10px"><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{if $deal['loantype'] eq 2}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$deal.remain_repay_money f=2}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{else}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$loan.get_repay_money f=2}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{/if}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{if $deal['loantype'] == 1}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:right;padding-right:10px">{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$loan.money f=2}&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{/if}<br>
+				&nbsp;&nbsp;&lt;/tr><br>
+				&nbsp;&nbsp;{/foreach}<br>
+				&nbsp;&nbsp;&lt;tr><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;">总计&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:right;padding-right:10px">{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$deal.borrow_amount f=2}&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td>&nbsp;&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td>&nbsp;&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{if $deal['loantype'] == 1}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td>&nbsp;&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{/if}<br>
+				&nbsp;&nbsp;&lt;/tr><br>
+				&lt;/table><br>
+			</div>
+			<div class="desc">
+				&nbsp;&nbsp;&nbsp;&nbsp;{if $deal['loantype'] == 0}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 每月应收本息&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{elseif $deal['loantype'] == 1}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 每月应收利息&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 到期还本金&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{elseif $deal['loantype'] == 2}<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;td style="text-align:center;"> 到期还本息&lt;/td><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;{/if}<br>
+				以上为判断语句 $deal['loantype']==0,1,2分别代表三种还款方式（等额本息，付息还本，到期本息）
+			</div>
+		</div>
+		<div class="item">
+			<div class="tit">{$user_info.user_name}</div>
+			<div class="desc">借款人（乙方）名称</div>
+		</div>
+		<div class="item">
+			<div class="tit">{$user_info.real_name}</div>
+			<div class="desc">借款人（乙方）姓名</div>
+		</div>
+		<div class="item">
+			<div class="tit">{$user_info.idno}</div>
+			<div class="desc">借款人（乙方）身份证</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="app_conf" v="COMPANY"}</div>
+			<div class="desc">见证人（丙方），在系统设置->贷款配置 设置</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="app_conf" v="COMPANY_ADDRESS"}</div>
+			<div class="desc">见证人（丙方）联系地址，在系统设置->贷款配置 设置</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="app_conf" v="COMPANY_REG_ADDRESS"}</div>
+			<div class="desc">见证人（丙方）注册地址，在系统设置->贷款配置 设置</div>
+		</div>
+		<div class="item">
+			<div class="tit">{$deal.agency_name}</div>
+			<div class="desc">丁方（担保方）名称，在贷款管理->机构管理->添加编辑页面设置</div>
+		</div>
+		<div class="item">
+			<div class="tit">{$deal.agency_address}</div>
+			<div class="desc">丁方（担保方）联系方式，在贷款管理->机构管理->添加编辑页面设置</div>
+		</div>
+		<div class="item">
+			<div class="tit">&lt;?php echo str_replace("http://","",get_domain()); ?&gt;</div>
+			<div class="desc">网站地址，这里进行了处理，过滤掉http://，如果不想过滤 可以直接写成&lt;?php echo get_domain(); ?&gt; 或者{function name="get_domain"}</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="to_date" v="$deal.repay_start_time" f="Y年m月d日"}</div>
+			<div class="desc">输出格式化后还款开始时间</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="to_date" v="$deal.end_repay_time" f="Y年m月d日"}</div>
+			<div class="desc">输出格式化后还款结束时间</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="number_format" v=$deal.services_fee f=1}</div>
+			<div class="desc">服务费率,这里我们进行了格式化，保留一位小数点，可以写成{$deal.services_fee}即按原型输出</div>
+		</div>
+		<div class="item">
+			<div class="tit">&lt;?php echo number_format(floatval($this->_var['deal']['services_fee'])*$this->_var['deal']['borrow_amount'],2);?&gt;</div>
+			<div class="desc">服务费,服务费 = 服务费率 X总的借款金额，在这里我们计算出后保留了2位小数点</div>
+		</div>
+		<div class="item">
+			<div class="tit">{$deal.month_repay_money_format}</div>
+			<div class="desc">月还本息数额</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="number_format" v=$deal.last_month_repay_money f=2}</div>
+			<div class="desc">最后一个月还本息数额</div>
+		</div>
+		<div class="item">
+			<div class="tit">{$deal.repay_time}</div>
+			<div class="desc">借款期限</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="app_conf" v="IMPOSE_FEE_DAY1"}</div>
+			<div class="desc">逾期罚息利率1-30天(%)</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="app_conf" v="IMPOSE_FEE_DAY2"}</div>
+			<div class="desc">逾期罚息利率31天及以上(%)</div>
+		</div>
+		<div class="item">
+			<div class="tit">{function name="app_conf" v="MANAGE_IMPOSE_FEE_DAY1"}</div>
+			<div class="desc">逾期管理费费率1-30天(%)</div>
+		</div>
+		<div class="item">
+			<div class="tit"> {function name="app_conf" v="MANAGE_IMPOSE_FEE_DAY2"}%</div>
+			<div class="desc">逾期管理费费率31天及以上(%)</div>
+		</div>
+	</div>
+</body>
+</html>

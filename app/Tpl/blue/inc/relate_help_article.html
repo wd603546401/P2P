@@ -1,0 +1,18 @@
+<div class="inc">
+	<div class="inc_main cf">
+		<div class="relate_help clearfix">
+			{foreach from=$deal_help key=key item=cate}
+			{if $cate.id eq $article.cate_id}
+				{if $cate.help_list}
+				<dl class="bdd" style="border-top:none">
+					<dt {if $key eq 0}style="border-top:0"{/if}>{$cate.title}</dt>
+					{foreach from=$cate.help_list item=item}
+					<dd {if $item.id eq $article.id}class="act"{/if}><a href="{$item.url}" {if $item.new eq 1}target="_blank"{/if}>{$item.title}</a></dd>
+					{/foreach}
+				</dl>
+				{/if}
+			{/if}
+			{/foreach}
+		</div>
+	</div>	
+</div>

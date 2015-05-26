@@ -1,0 +1,151 @@
+<?php
+$this->_var['pmjs'][] = $this->_var['TMPL_REAL']."/js/pm.js";
+$this->_var['cpmjs'][] = $this->_var['TMPL_REAL']."/js/pm.js";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$pmjs" c="$cpmjs"}"></script>
+<div class="uc_r_bl">
+	<div class="list_title clearfix">
+		<div class="cur"><a href="{url x="index" r="uc_msg#setting"}">{$page_title}</a></div>
+	</div>
+	<div class="list_cont clearfix">
+		<div class="f_dgray f14 b">我是借入者</div>
+		<div class="clearfix">
+			<form method="post" action="{url x="index" r="uc_msg#savesetting"}" name="save_bind_notice">
+	            <table width="100%" border="0" cellspacing="1px" class="funds" style="margin:10px auto">
+	                <tbody>
+		                <tr class="title f_dgray b">
+		                    <td width="34%"></td>
+		                    <td width="34%">电子邮件 </td>
+		                    <td width="33%"> 站内信</td>
+		                </tr>
+		                <tr>
+		                    <td class="pl10 pr10 b f_dgray tl">
+							有人对我的借款列表提问
+		                    </td>
+		                    <td>
+		                        <input type="checkbox" name="mail_asked" value="1" {if $msg_setting.sms_asked eq 1|| !$msg_setting}checked="checked"{/if} id="settingForm_mail_asked">
+		                    </td>
+		                    <td>
+		                        <input type="checkbox" name="sms_asked" value="1" {if $msg_setting.sms_asked eq 1}checked="checked"{/if} id="settingForm_sms_asked">
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td class="pl10 pr10 b f_dgray tl">
+							有人向我的借款列表投标
+		                    </td>
+		                    <td>
+		                        <input type="checkbox" name="mail_bid" value="1" {if $msg_setting.mail_bid eq 1}checked="checked"{/if} id="settingForm_mail_bid">
+		                    </td>
+		                    <td>
+		                        <input type="checkbox" name="sms_bid" value="1" {if $msg_setting.sms_bid eq 1}checked="checked"{/if} id="settingForm_sms_bid">
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td class="pl10 pr10 b f_dgray tl">
+							我的借款列表流标
+		                    </td>
+		                    <td>
+		                        <input type="checkbox" name="mail_myfail" value="1" {if $msg_setting.mail_myfail eq 1 || !$msg_setting}checked="checked"{/if} id="settingForm_mail_myFail">
+		                    </td>
+		                    <td>
+		                        <input type="checkbox" name="sms_myfail" value="1" {if $msg_setting.sms_myfail eq 1}checked="checked"{/if} id="settingForm_sms_myFail">
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td class="pl10 pr10 b f_dgray tl">
+							 我的借款列表完成度超过50%
+		                    </td>   
+		                    <td>
+		                        <input type="checkbox" name="mail_half" value="1" {if $msg_setting.mail_half eq 1 || !$msg_setting}checked="checked"{/if} id="settingForm_mail_half">
+		                    </td>
+		                    <td>
+		                        <input type="checkbox" name="sms_half" value="1" {if $msg_setting.sms_half eq 1}checked="checked"{/if} id="settingForm_sms_half">
+		                    </td>
+		                </tr>
+		            </tbody>
+				</table>
+				<div class="blank20"></div>
+				<div class="f_dgray f14 b">我是借出者</div>
+				<table width="100%" align="center" border="0" cellspacing="1px" class="funds" style="margin:10px auto">
+					<tbody>
+						<tr class="title f_dgray b">
+							<td width="34%"></td>
+							<td width="34%">电子邮件</td>
+							<td width="33%">站内信</td>
+						</tr>
+						<tr>
+							<td class="pl10 pr10 b f_dgray tl">
+								我的投标成功
+							</td>
+							<td>
+								<input type="checkbox" name="mail_bidsuccess" value="1" {if $msg_setting.mail_bidsuccess eq 1|| !$msg_setting}checked="checked"{/if} id="settingForm_mail_bidSuccess">
+							</td>
+							<td>
+								<input type="checkbox" name="sms_bidsuccess" value="1" {if $msg_setting.sms_bidsuccess eq 1}checked="checked"{/if} id="settingForm_sms_bidSuccess">
+							</td>
+						</tr>
+						<tr>
+							<td class="pl10 pr10 b f_dgray tl">
+								我的投标流标
+							</td>
+							<td>
+								<input type="checkbox" name="mail_fail" value="1" {if $msg_setting.mail_fail eq 1}checked="checked"{/if} id="settingForm_mail_fail">
+							</td>
+							<td>
+								<input type="checkbox" name="sms_fail" value="1" {if $msg_setting.sms_fail eq 1 || !$msg_setting}checked="checked"{/if} id="settingForm_fail">
+							</td>
+						</tr>
+						<tr>
+							<td class="pl10 pr10 b f_dgray tl">
+								我收到一笔还款
+							</td>
+							<td>
+								<input type="checkbox" name="mail_bidrepaid" value="1" {if $msg_setting.mail_bidrepaid eq 1 || !$msg_setting}checked="checked"{/if} id="settingForm_mail_bidRepaid">
+							</td>
+							<td>
+								<input type="checkbox" name="sms_bidrepaid" value="1" {if $msg_setting.sms_bidrepaid eq 1}checked="checked"{/if} id="settingForm_sms_bidRepaid">
+							</td>
+						</tr>
+						<tr>
+							<td class="pl10 pr10 b f_dgray tl">
+								借入者回答了我对借款列表的提问
+							</td>
+							<td>
+								<input type="checkbox" name="mail_answer" value="1" {if $msg_setting.mail_answer eq 1}checked="checked"{/if} id="settingForm_mail_answer">
+							</td>
+							<td>
+								<input type="checkbox" name="sms_answer" value="1" {if $msg_setting.sms_answer eq 1 || !$msg_setting}checked="checked"{/if} id="settingForm_sms_answer">
+							</td>
+						</tr>
+						<tr>
+							<td class="pl10 pr10 b f_dgray tl">
+								债权转让失败提醒
+							</td>
+							<td>
+								<input type="checkbox" name="mail_transferfail" value="1" {if $msg_setting.mail_transferfail eq 1}checked="checked"{/if} id="settingForm_mail_transferfail">
+							</td>
+							<td>
+								<input type="checkbox" name="sms_transferfail" value="1" {if $msg_setting.sms_transferfail eq 1 || !$msg_setting}checked="checked"{/if} id="settingForm_sms_transferfail">
+							</td>
+						</tr>
+						<tr>
+							<td class="pl10 pr10 b f_dgray tl">
+								债权转让成功提醒
+							</td>
+							<td>
+								<input type="checkbox" name="mail_transfer" value="1" {if $msg_setting.mail_transfer eq 1}checked="checked"{/if} id="settingForm_mail_transfer">
+							</td>
+							<td>
+								<input type="checkbox" name="sms_transfer" value="1" {if $msg_setting.sms_transfer eq 1 || !$msg_setting}checked="checked"{/if} id="settingForm_sms_transfer">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="blank20"></div>
+				<div class="tc"><button class="sub_btn" type="submit">保存设置</button></div>
+			</form>
+        </div>
+	</div>
+	<div class="inc_foot"></div>
+</div>
+

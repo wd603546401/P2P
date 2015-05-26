@@ -1,0 +1,78 @@
+{include file="inc/header.html"}
+<style type="text/css">
+	.about_title1 {
+		font-size: 18px;
+		font-weight: bold;
+		color: #00bef0;
+	}
+	.about_title2 {
+		font-size: 14px;
+		font-weight: bold;
+		color: #00bef0;
+	}
+	.startFinanceBtn {
+		border: 0;
+		background: url("{$TMPL}/images/start_finance.png") no-repeat;
+		width: 84px;
+		height: 28px;
+		cursor: pointer;
+		padding: 0px;
+		margin: 0px;
+	}
+	.short{ margin:0; margin-left:20px; }
+	.about_title{ color:#fff; }
+	.about_title a{ color:#fff; }
+</style>
+<div class="blank"></div>
+<div class="wrap clearfix" id="aboutBorrow">
+	<div class="long f_l">
+		<div class="clearfix bddf">
+			<div class="gray_title clearfix" style="text-align:center;">
+		        <div class="f_l about_title">
+					<a href="{url x="index" r="deals#about"}">我要理财</a> &gt; 
+					<a href="{url x="index" r="deals#about"}">关于理财</a> &gt; 
+					<a href="{url x="index" r="deals#about" p="u=$info.uname"}">{$info.title}</a>
+				</div>
+			</div>
+			<div style="width: 698px; height:auto; padding: 30px;" class="clearfix">
+				<div class="tc about_title1">{$info.title}</div>
+	        	{$info.content}
+		    </div>
+		</div>
+		
+	</div>
+	
+	<div class="short f_r">
+		<div class="bddf clearfix">
+			<div class="gray_title clearfix">
+	            <div class="f_l f_dgray b">加入我们</div>
+	        </div>
+			<div class="clearfix tc pt10 pr5 pb10 pl5">
+		        <div class="p10">
+		             <input type="button" class="startFinanceBtn" value="" onclick="window.location.href='{url x="index" r="deals"}'">
+		        </div>
+		        <div>
+			            还没找到适合自己的理财方式吗？<br>
+			            快来加入我们吧！
+		        </div>
+	        </div>
+		</div>
+		<div class="blank"></div>
+		<div class="bddf clearfix">
+			<div class="gray_title clearfix">
+	            <div class="f_l f_dgray b">关于理财</div>
+	        </div>
+			
+			<div class="clearfix pt5 pb5">
+	            <ul style="margin:5px;">
+					{foreach from="$about_list" item=item}
+		            <li style="padding: 2px;" class="ldot">· <a href="{url x="index" r="deals#about" p="u=$item.uname"}">{$item.title}</a></li>
+		        	{/foreach}
+				</ul>
+	        </div>
+		</div>
+    </div>
+</div>
+<div class="blank"></div>
+
+{include file="inc/footer.html"}

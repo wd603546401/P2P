@@ -1,0 +1,69 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("UserLevel/index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">等级名称:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="name" value="{$vo.name}" /></td>
+	</tr>
+	<tr>
+		<td class="item_title">所需信用积分:</td>
+		<td class="item_input"><input type="text" class="textbox" name="point" value="{$vo.point}" /></td>
+	</tr>
+	<tr>
+		<td class="item_title">服务费用:</td>
+		<td class="item_input"><input type="text" class="textbox" name="services_fee" value="{$vo.services_fee}" />%</td>
+	</tr>
+	<tr>
+		<td class="item_title">借款期限:</td>
+		<td class="item_input">
+			<textarea class="textbox" name="repaytime" style="height:200px">{$vo.repaytime}</textarea>
+			<br>
+			<span class="tip_span">
+				参数说明:一行代表一个借款的期限和利率
+				<br/><b style="color:black">参数一|参数二|参数三|参数四</b>
+				<br/>参数一:长度;
+				<br/>参数二:长度类型 0代表是天，1代表是月;
+				<br/>参数三:最小利率
+				<br/>参数四:最大利率
+				<br/><b style="color:black">多个用回车</b>
+				<br><br>
+				如果填写的是天，那么最好不要过30
+				<br>
+				天计算方式比较特殊，不管你选择多少天都是按月利率来算计算，即:所填利率/12,所以请填写比较适当的利率参数
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">筹款期限:</td>
+		<td class="item_input">
+			<input type="text" class="textbox" name="enddate" value="{$vo.enddate}" />
+			<span class="tip_span">多个用,隔开</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="UserLevel" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="update" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

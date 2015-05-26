@@ -1,0 +1,86 @@
+	</div>
+	<div class="blank20"></div>
+	<div id="ftw">
+        <div id="ft">
+        	{if $MODULE_NAME neq 'user'}
+        	<div class="wrap">
+	            <ul class="cf">
+	            	{foreach from=$deal_help item=help_cate name="help_cate"}
+					{if $smarty.foreach.help_cate.iteration <= app_conf('HELP_CATE_LIMIT')}
+					<li class="col hp{$smarty.foreach.help_cate.iteration}{if $smarty.foreach.help_cate.last} end{/if}">
+	                    <h3>{$help_cate.title}</h3>
+	                    <ul class="sub-list">
+							{foreach from=$help_cate.help_list item=help_item name="help_item"}
+							{if $smarty.foreach.help_item.iteration <= app_conf('HELP_ITEM_LIMIT')}
+							<li><a href="{$help_item.url}" {if $help_item.new eq 1}target="_blank"{/if}>{$help_item.title}</a></li>
+							{/if}
+							{/foreach}             
+						</ul>
+	                </li> 
+					{/if}
+					{/foreach}
+	            </ul>
+				<div class="blank"></div>
+			</div>
+			<div class="footer_line"></div>
+			{/if}
+			<div class="wrap">
+				{if $f_link_data}
+				<div class="flink">
+				{foreach from=$f_link_data item=link_group}			
+					<span style="color:#ccc; float:left; padding:5px 10px 5px 0px;">{$link_group.name}</span>
+					{foreach from=$link_group.links item=link}
+						<a href="http://{$link.url}" target="_blank" title="{if $link.description}{$link.description}{else}{$link.name}{/if}">{if $link.img neq ''}<img src='{$link.img}' alt="{if $link.description}{$link.description}{else}{$link.name}{/if}" />{else}{$link.name}{/if}</a>
+					{/foreach}
+					<div class="blank1"></div>
+				{/foreach}
+				</div>		
+				<div class="blank"></div>
+				{/if}
+	            <div class=copyright>
+	            	{if $system_article}
+					<div class="tc clearfix">
+					{foreach from=$system_article item=sys_item key=key}
+					{if $key gt 0}&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;{/if}<a href="{$sys_item.url}" title="{$sys_item.title}">{$sys_item.title}</a>
+					{/foreach}
+					</div>
+					<div class="blank"></div>
+					{/if}
+	            	{if app_conf("SHOP_TEL") neq ''}
+					{$LANG.TEL}：{function name="app_conf" value="SHOP_TEL"} {function name="app_conf" value="ONLINE_TIME"}  
+					&nbsp;&nbsp;
+					{/if}				
+					{function name="app_conf" value="ICP_LICENSE"}&nbsp;&nbsp;
+					{function name="app_conf" value="COUNT_CODE"}
+					<div class="blank1"></div>	
+					{function name="app_conf" value="SHOP_FOOTER"} 
+					<div class="blank"></div>				
+					{if app_conf("ONLINE_QQ") neq '' or app_conf("ONLINE_MSN") neq ''}
+					{foreach from=$online_msn item=msn}
+					{if $msn neq ''}
+					<a id=service-msn-help href="msnim:chat?contact={$msn}" target=_blank>
+						<img src="{$TMPL}/images/button-custom-msn.gif">
+					</a> 
+					{/if}
+					{/foreach}
+					{foreach from=$online_qq item=qq}
+					{if $qq neq ''}
+					<a href="http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes" target=_blank>
+						<img alt="" src="{$TMPL}/images/button-custom-qq.gif">
+					</a>
+					{/if}
+					{/foreach}				
+					<div class="blank1"></div>
+					{/if}
+					
+	            </div>
+        </div>
+    </div>
+	<div id="gotop"></div>
+{if $MODULE_NAME neq 'guide'}
+<script type="text/javascript" defer="defer">
+	resetWindowBox();
+</script>
+{/if}
+</body>
+</html>

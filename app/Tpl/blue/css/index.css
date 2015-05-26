@@ -1,0 +1,141 @@
+@font-face {
+    font-family: 'vaniregular';
+    src: url('../images/fonts/vani-webfont.eot');
+    src: url('../images/fonts/vani-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../images/fonts/vani-webfont.woff') format('woff'),
+         url('../images/fonts/vani-webfont.ttf') format('truetype'),
+         url('../images/fonts/vani-webfont.svg#vaniregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body{background:#fff;}
+.feature{ margin-bottom:30px; overflow:hidden; width:100%; }
+.feature a{ display:inline-block; font-family:"Microsoft YaHei"; overflow:hidden; text-align:center; text-decoration:none; padding:0 50px; width:171px; }
+.feature a i{ background:url(../images/index_icon1.png) no-repeat; display:block; height:87px; margin:0 auto 22px; width:87px; }
+.feature .fea2 i{ background:url(../images/index_icon2.png) no-repeat; }
+.feature .fea3 i{ background:url(../images/index_icon3.png) no-repeat; }
+.feature .fea4 i{ background:url(../images/index_icon4.png) no-repeat; }
+.feature a h3{ color:#000; font-size:20px; margin-bottom:10px; }
+.feature a span{ color:#aaa; }
+
+
+.total{ line-height:normal; border:1px solid #e3e3e3; background-color:#f9f9f9; margin-bottom:20px; overflow:hidden; padding:24px 0; width:1098px; }
+.total .t{line-height:normal; float:left; text-align:center; width:366px;}
+.total p{line-height:normal; color:#000; margin-bottom:24px; }
+
+
+.total .money{ color:#00bef0; font-size:30px; }
+.total .money span{ font-family:vaniregular; font-size:36px; }
+.total em{ color:#939393; }
+.total .note{ background:url(../images/index_icon5.png) 0 0 no-repeat; clear:both; margin:0px 0 0 80px; overflow:hidden; padding-left:16px; }
+
+.index_left{ background-color:#fff; border:1px solid #e3e3e3; width:760px; }
+.index_right{ width:318px;}
+.r-block{ background-color:#fff; }
+.r-block .gray_title{padding-right:6px}
+.r-block li{ height:26px; line-height:26px}
+.r-block a{ color:#535353}
+.i_deal_list { color:#666; font-family:"Microsoft YaHei"; text-align:center; }
+.i_deal_list .item{ border-bottom:1px dashed #E5E5E5;  padding:14px 0}
+.i_deal_list .item .tit{ height:28px; line-height:28px; font-size:14px}
+.i_deal_list .item .tit .cate_tip{ background:url(../images/cate_tip.gif) no-repeat 0 0; height:23px; line-height:23px; padding-left:13px; width:75px; font-weight:normal; font-size:12px; color:#FD6000}
+.i_deal_list .item .tit .cate_tip_1{background:url(../images/cate_tip_1.gif) no-repeat 0 0;color:#FD6000}
+.i_deal_list .item .tit .cate_tip_2{background:url(../images/cate_tip_2.gif) no-repeat 0 0;color:#000}
+.i_deal_list .item .tit .cate_tip_3{background:url(../images/cate_tip_3.gif) no-repeat 0 0;color:red}
+.i_deal_list .item .tit .cate_tip_4{background:url(../images/cate_tip_4.gif) no-repeat 0 0;color:#567BB2}
+.i_deal_list .item_1{ background:#FAFCFB}
+.i_deal_list .item .detail{ width:530px}
+.i_deal_list .item .detail .f_red{ color:#C20000; font-family:Arial; font-weight:bolder;}
+.i_deal_list .item .detail .info{ font-size:12px; 
+padding: 3px 0 5px 0;
+width: 175px;
+color: #3c3c3c;}
+.i_deal_list .item .detail .info2{width: 205px;}
+.i_deal_list .item .detail .info3{width: 140px;}
+.i_deal_list .item .detail .progressBar{width:126px; margin-top:2px}
+.i_deal_list table td{ color:#666; padding:20px 0; text-align:center; }
+.i_deal_list .more{ color:#a9a9a9; display:block; font-size:16px; font-weight:normal; margin-top:20px; }
+
+.notice-list{
+	border:1px solid #e3e3e3;
+	border-top:none;
+	padding: 5px 12px;
+}
+.notice-list ul{
+list-style: url(../images/li1.gif) inside;
+
+}
+
+.notice-list li{ height:26px; line-height:26px;}
+
+#case { padding:0; }
+#case li { color:#666; font-family:"Microsoft YaHei"; padding:10px; }
+#case li span { display:inline-block; width:74px; }
+.borrow_out,.borrow_in{z-index:10;display:block; width:110px;height:48px; left:30px; top:87px; overflow:hidden; background:#fff;
+filter:alpha(opacity=0);opacity:0.0}
+.borrow_in{left:180px}
+
+#examIndex{
+	overflow: hidden;
+	height:245px
+}
+#examIndex ul li {
+	border-bottom:1px dashed #e3e3e3;
+	overflow: hidden;
+	color: #666;
+	height: 48px;
+	font-family:"Microsoft YaHei";
+	padding:10px 0;
+}
+
+#examIndex ul li a{ color:#666;}
+
+
+#loadtop {}
+#loadtop .ti {
+	height: 36px;
+	line-height: 36px;
+	background:#00bef0;
+	color: #fff;
+	padding-left: 15px;
+	font-weight:bolder;
+	position:relative;
+}
+#loadtop #rightTitls {
+	float: right;
+	right:0;
+	position:absolute;
+	text-align: right;
+	width: 80px;
+}
+#loadtop #rightTitls li {
+	cursor: pointer;
+	float: left;
+	list-style-type: none;
+	text-align: center;
+	width: 25px;
+}
+
+#loadtop #rightTitls li a {
+	color: #333;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	z-index: 10;
+	width:25px;
+	height:36px;
+	line-height:36px;
+	text-align:center;
+	font-size:14px;
+}
+
+#loadtop #rightTitls li.current a{
+	background:#02a0ca;
+	color:#fff;
+	font-weight:bolder;
+}
+#loadtop #J_conbox li span{ display:block; float:left;}
+#loadtop #J_conbox li span.nums{width:30px}
+#loadtop #J_conbox li span.uname{width:120px}
+#loadtop #J_conbox li span.money{width:140px; text-align:right;}

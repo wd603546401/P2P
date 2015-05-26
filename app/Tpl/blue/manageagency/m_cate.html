@@ -1,0 +1,31 @@
+<div id="uc_cate">
+	<div class="hdc c_hds c_hd0">担保机构信息</div>
+	<div class="c_body">
+		<ul class="menu">
+			<li class="{if $MODULE_NAME eq 'manageagency' &&$ACTION_NAME eq 'account'}act{/if}" ><a class="uc_cate" href="{url x="index" r="manageagency#account"}" title="账户资料">账户资料</a></li>
+			<li class="{if $MODULE_NAME eq 'manageagency' &&$ACTION_NAME eq 'security'}act{/if}" ><a class="uc_cate" href="{url x="index" r="manageagency#security"}" title="安全设置">安全设置</a></li>
+		</ul>
+	</div>
+	<div class="hdc c_hds c_hd1">担保管理</div>
+	<div class="c_body">
+		<ul class="menu">
+			<li class="{if $MODULE_NAME eq 'manageagency' && $ACTION_NAME eq 'agencydeal' }act{/if}" > <a class="uc_cate" href="{url x="index" r="manageagency#agencydeal"}" title="担保中的借款">担保中的借款</a></li>
+			<li class="{if $MODULE_NAME eq 'manageagency' && $ACTION_NAME eq 'agencydealing'}act{/if}" > <a class="uc_cate" href="{url x="index" r="manageagency#agencydealing"}" title="邀约中的借款">邀约中的借款</a></li>	
+		</ul>
+	</div>
+	
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#uc_cate li.act").parent().parent().prev(".hdc").removeClass("c_hds");
+	$("#uc_cate li.act").parent().parent().prev(".hdc").addClass("c_hd");
+					   
+	/* 滑动/展开 */
+	$("#uc_cate .hdc").click(function(){
+		
+		$(this).next(".c_body").slideToggle();
+		
+	});
+	
+});
+</script>

@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^index\/((credit|mobile|aboutp2p|aboutlaws|aboutfee|borrow|guarantee|uc_credit|uc_deal|uc_invest|uc_earnings|uc_autobid|usagetip|tool|belender|helpcenter|uc_medal|deals|deal|op|acate|ajax|article|avatar|cate|exchange|goods|help|link|mall|msg|notice|payment|rec|score|space|ss|sys|topic|uc_account|uc_center|uc_collect|uc_consignee|uc_coupon|uc_invite|uc_message|uc_money|uc_order|uc_topic|uc_voucher|url|user|vote|uc_msg|daren|agency)[^\.&]*)$  index.php\?rewrite_param=$1 [QSA,L]
+RewriteRule ^((credit|mobile|aboutp2p|aboutlaws|aboutfee|borrow|guarantee|uc_credit|uc_deal|uc_invest|uc_earnings|uc_autobid|usagetip|tool|belender|helpcenter|uc_medal|deals|deal|op|acate|ajax|article|avatar|cate|exchange|goods|help|link|mall|msg|notice|payment|rec|score|space|ss|sys|topic|uc_account|uc_center|uc_collect|uc_consignee|uc_coupon|uc_invite|uc_message|uc_money|uc_order|uc_topic|uc_voucher|url|user|vote|uc_msg|daren|agency)[^\.&]*)$  index.php\?rewrite_param=$1 [QSA,L]
+RewriteRule ^(index)([^\.&]*)$  $1.php\?rewrite_param=$2 [QSA,L]
+</IfModule>

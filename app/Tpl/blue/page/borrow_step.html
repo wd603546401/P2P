@@ -1,0 +1,49 @@
+{include file="inc/header.html"}
+<div class="blank"></div>
+<div class="regstep">
+    <ol class="ui-step ui-step-3">
+        <li class="ui-step-start {if $ACTION_NAME eq 'stepone'}ui-step-active{/if} {if $ACTION_NAME eq 'steptwo'}ui-step-done{/if}">
+            <div class="ui-step-line">-</div>
+            <div class="ui-step-icon">
+                <i class="iconfont"></i>
+                <i class="ui-step-number">1</i>
+                <span class="ui-step-text">填写借款信息</span>
+            </div>
+        </li>
+        <li class="{if $ACTION_NAME eq 'steptwo'}ui-step-wait{/if}">
+            <div class="ui-step-line">-</div>
+            <div class="ui-step-icon">
+                <i class="iconfont"><span></span></i>
+                <i class="ui-step-number">2</i>
+                <span class="ui-step-text">等待审核</span>
+            </div>
+        </li>
+        <li class="ui-step-end">
+            <div class="ui-step-line">-</div>
+            <div class="ui-step-icon">
+                <i class="iconfont"></i>
+                <i class="ui-step-number">3</i>
+                <span class="ui-step-text">审核成功</span>
+            </div>
+        </li>
+    </ol>
+</div>
+<div class="blank20"></div>
+<div class="wrap wb clearfix">
+	<div class="clearfix p20">
+		{if $step eq 1 && $user_statics.success_deal_count eq 0}
+		<div class="list_title clearfix">
+			<div {if $status eq 1}class="cur"{/if}><a href="{url x="index" r="borrow#stepone" p="status=1"}">个人详细信息</a></div>
+			{if $user_info.real_name neq ""&&$user_info.idno neq ""&&$user_info.mobile neq ""&&$user_info.marriage neq ""&&$user_info.address neq ""}
+			<div {if $status eq 2}class="cur"{/if}><a href="{url x="index" r="borrow#stepone" p="status=2"}">工作认证信息</a></div>
+			{if $work_count gt 0}
+			<div {if $status eq 3}class="cur"{/if}><a href="{url x="index" r="borrow#stepone" p="status=3"}">贷款申请</a></div>
+			{/if}
+			{/if}
+		</div>
+		{/if}
+		{include file="$inc_file"}
+    </div>
+</div>
+<div class="blank"></div>
+{include file="inc/footer.html"}

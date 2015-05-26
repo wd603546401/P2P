@@ -1,0 +1,212 @@
+{include file="inc/header.html"}
+<style type="text/css">
+	body{ background-color:#fff; }
+	.box750 {
+		margin: 10px auto;
+		border: 1px solid #CCC;
+		padding: 15px;
+		border-radius: 5px;
+	}
+	.box750 .blueTable {
+		background:#ddd;
+		text-align: center;
+	}
+	.box750 .blueTable th {
+		background: #D4E5FF;
+		line-height: 42px;
+		text-align: center;
+		font-weight: bold;
+	}
+	.box750 .blueTable td{ background:#fff; line-height:40px}
+	.box750 .blueTable .grayBg {
+		background: #CCC;
+		padding: 2px 10px;
+		color: white;
+	}
+	.box750 .blueTable .blueBg {
+		background: #5896DF;
+		padding: 2px 10px;
+		color: white;
+	}
+	.box750 .blueTable .greenBg { background:#77c22f; padding:2px 10px; color:#fff; }
+	.box750 .blueTable .redBg { background:#ff0000; padding:2px 10px; color:#fff; }
+	.credit_upload .field{ width:98%}
+</style>
+<div class="blank"></div>
+<div class="wrap clearfix wb">
+	<div class="toptitle">{$info.title}</div>
+	<div class="line950"></div>
+	<div class="clearfix" style="padding:5px 110px;">
+		<div class="box750">
+	        <table width="100%">
+	          <tbody>
+	          	<tr>
+		            <td>我的信用等级：<img width=40 heigth=40 src="{$TMPL}/images/{$user_point_level}.png" align="absmiddle"> <span>({$user_info.point})</span></td>
+		            <td rowspan="2" align="right"><a href="{url x="index" r="borrow"}"><img src="{$TMPL}/images/sqdk123.jpg"></a>
+		            <a style="margin:0 20px;" href="{url x="index" r="borrow#applyamount"}"><img src="{$TMPL}/images/sqedu123.jpg"></a>
+		            </td>
+		          </tr>
+		          <tr>
+		            <td>我的信用额度：{$user_info.quota} (可用额度：{$can_use_quota})</td>
+		          </tr>
+		        </tbody>
+			</table>
+      	</div>
+		
+		<div class="box750">
+    		<table class="blueTable" width="100%" align="center" border="0" cellspacing="1">
+                <tbody>
+                    <tr class="title">
+                        <th width="100px">&nbsp;</th>
+                        <th width="">项目</th>
+                        <th width="75px">状态</th>
+						<th width="75px">信用分数</th>
+                    </tr>
+                    <tr>
+                        <td>基本信息</td>
+                        <td class="item">个人详细信息，工作信息</td>
+                        <td ></td>
+                        <td>
+                            <span class="f_red">{function name="app_conf" v="USER_REGISTER_POINT"}</span>分
+                        </td>
+                    </tr> 
+                    <?php $must_idx =0; ?>
+						{foreach from="$credit_file" item="credit" name="credits"}
+						{if $credit.must eq 1}
+						<?php $must_idx ++ ; ?>
+						<tr>
+							<?php if($must_idx == 1){ ?>
+								<td rowspan="{$must_credit_count}" class="white_bg b">必要信用认证</td>
+							<?php } ?>
+							<td class="<?php if($must_idx % 2 == 1){ echo 'white_bg';} ?> item">
+								<p>{$credit.type_name} ({$credit.point}分)</p>
+							</td>
+							<td class="<?php if($must_idx % 2 == 1){ echo 'white_bg';} ?> f_gray">
+								{if $credit.passed eq 1}
+									{if $credit.has_expire eq 1}
+									<span class="redBg">已过期</span>
+									{else}
+									<span class="greenBg">已通过</span>
+									{/if}
+								{elseif $credit.passed eq 2}
+								<span class="redBg">未通过</span>
+	                        	{elseif $credit.passed eq 0}
+									{if $credit.user_id gt 0}
+									<span class="grayBg">审核中</span>
+									{else}
+									<span class="blueBg">待完成</span>
+									{/if}
+								{/if}
+							</td>
+							<?php if($must_idx == 1){ ?>
+							<td rowspan="{function name="count" v="$credit_file"}" class="white_bg"><span class="f_red">{$level_point.need_other_point}</span>分</td>
+							<?php } ?>
+						</tr>
+						{/if}
+						{/foreach}
+						
+						<?php $other_idx =0; ?>
+						{foreach from="$credit_file" item="credit" name="credits"}
+						{if $credit.must eq 0}
+						<?php $other_idx ++ ; ?>
+						<tr>
+							<?php if($other_idx == 1){ ?>
+								<td rowspan="{$other_credit_count}" class=" b">可选信用认证</td>
+							<?php } ?>
+							<td class="<?php if($other_idx % 2 == 1){ echo 'white_bg';} ?> item">
+								<p>{$credit.type_name} ({$credit.point}分)</p>
+							</td>
+							<td class="<?php if($other_idx % 2 == 1){ echo 'white_bg';} ?> f_gray">
+								{if $credit.passed eq 1}
+									{if $credit.has_expire eq 1}
+									<span class="redBg">已过期</span>
+									{else}
+									<span class="greenBg">已通过</span>
+									{/if}
+								{elseif $credit.passed eq 2}
+								<span class="redBg">未通过</span>
+	                        	{elseif $credit.passed eq 0}
+									{if $credit.user_id gt 0}
+									<span class="grayBg">审核中</span>
+									{else}
+									<span class="blueBg">待完成</span>
+									{/if}
+								{/if}
+							</td>
+							<?php if($other_idx == 1 && $must_idx== 0){ ?>
+							<td rowspan="{function name="count" v="$credit_file"}" class="white_bg"><span class="f_red">{$level_point.need_other_point}</span>分</td>
+							<?php } ?>
+						</tr>
+						{/if}
+						{/foreach}
+                   
+                    <tr>
+                      <td rowspan="3">
+                            {function name="app_conf" v="SHOP_TITLE"}记录
+                        </td>
+                        <td class="item">
+                        	还清笔数（+{function name="app_conf" v="REPAY_SUCCESS_POINT"}分/笔，加分间隔{function name="app_conf" v="REPAY_SUCCESS_DAY"}天，总分上限{function name="app_conf" v="REPAY_SUCCESS_LIMIT"}分）
+                        </td>
+                        <td >
+                             {$level_point.repay_success.total_count} 笔
+                        </td>
+                        <td>
+                            <span class="f_red">{if $level_point.repay_success.total_point}{$level_point.repay_success.total_point}{else}0{/if}</span>分
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="item">
+                        	逾期次数（{function name="app_conf" v="IMPOSE_POINT"}分/次）
+                        </td>
+                        <td >
+                            {$level_point.impose_repay.total_count} 次
+                        </td>
+                        <td>
+                            <span class="f_red">{if $level_point.impose_repay.total_point}{$level_point.impose_repay.total_point}{else}0{/if}</span>分
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="item">
+                        	严重逾期次数（{function name="app_conf" v="YZ_IMPOSE_POINT"}分/次）
+                        </td>
+                        <td >
+                            {$level_point.yz_impose_repay.total_count} 次
+                        </td>
+                        <td>
+                            <span class="f_red">{if $level_point.yz_impose_repay.total_point}{$level_point.yz_impose_repay.total_point}{else}0{/if}</span>分
+                        </td>
+                    </tr>
+                </tbody>
+			</table>
+		</div>
+		<div class="box750">
+	        <table class="blueTable" width="100%" align="center" border="0" cellspacing="1px">
+                <tr class="title">
+                    <th colspan="8">信用等级及对应的分数 </th>
+                  </tr>
+                 <tr height="30px">
+                    <td width="100">信用等级</td>
+                   {foreach from=$list item=item}
+					<td><img alt="{$item.name}" src="{$TMPL}/images/{$item.name}.png"></td>
+					{/foreach}
+                </tr> 
+                <tr>
+                    <td>信用分数</td>
+                        {foreach from=$list item=item key=key name="level"}
+					<td>
+						{if $smarty.foreach.level.first}
+							{$item.point}及以上
+						{else}
+							<?php echo $this->_var['list'][$this->_var['key']-1]['point']-1;?>-{$item.point}
+						{/if}
+					</td>
+					{/foreach}
+                </tr>  
+	         </table>
+		 </div>
+		 <div class="box750">注：每笔还清+{function name="app_conf" v="REPAY_SUCCESS_POINT"}分，加分间隔{function name="app_conf" v="REPAY_SUCCESS_DAY"}天</div>
+    </div>
+</div>
+<div class="blank"></div>
+
+{include file="inc/footer.html"}

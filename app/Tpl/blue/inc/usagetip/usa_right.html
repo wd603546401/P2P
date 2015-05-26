@@ -1,0 +1,12 @@
+<div class="inc">
+	<div class="inc_main cf">
+		<div class="relate_help clearfix">
+			<dl class="bdd" style="border-top:none">
+				<dt>使用技巧</dt>
+				{foreach from="$use_tech_list.list" item="use"}
+				<dd><a href="{url x="index" r="usagetip" p="id=$use.id"}">{$use.title}</a></dd>
+				{/foreach}
+			</dl>
+		</div>
+	</div>	
+</div>

@@ -1,0 +1,74 @@
+<div class="list">
+	<div class="list_title clearfix">
+		<div {if $ACTION_NAME eq 'index'}class="cur"{/if}><a href="{url x="index" r="uc_invest"}">{$page_title}</a></div>
+		<div {if $ACTION_NAME eq 'invite'}class="cur"{/if}><a href="{url x="index" r="uc_invest#invite"}">招标中借款</a></div>
+		<div {if $ACTION_NAME eq 'ing'}class="cur"{/if}><a href="{url x="index" r="uc_invest#ing"}">回收中借款</a></div>
+		<div {if $ACTION_NAME eq 'over'}class="cur"{/if}><a href="{url x="index" r="uc_invest#over"}">已回收借款</a></div>
+		<div {if $ACTION_NAME eq 'bad'}class="cur"{/if}><a href="{url x="index" r="uc_invest#bad"}">我的坏账</a></div>
+	</div>
+	<div class="list_cont">
+		<div class="i_deal_list clearfix">
+			{if $list}
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr  border="0" style="background-color:#00bef0; color:#fff; height:34px;">
+						<th>标题</th>
+						<th style="width:20%">借款人/所在地</th>
+						<th style="width:12%">我的投标金额</th>
+						<th style="width:16%">期限/利率</th>
+						<th style="width:10%">信用等级</th>
+						<th style="width:15%">进度/剩余时间</th>
+					</tr>
+					{foreach from=$list item="item" key=key}
+					<tr class="item {if $key mod 2 eq 1}item_1{/if}" {if $smarty.foreach.deal.last}style="border-bottom:0"{/if}>
+						<td align="left">
+							<div class="pl10">
+							<a href="{url x="index" r="deal" p="id=$item.id"}">
+	                       		<a href="{url x="index" r="deal" p="id=$item.id"}">{$item.name}</a>
+	                   	 	</a>
+							</div>
+						</td>
+						<td>
+	                    	<p><a href="{url x="index" r="space" p="id=$item.user_id"}">{$item.user_name}</a> / {$item.user_location}</p>
+						</td>
+						<td>
+							{function name="format_price" v="$item.u_load_money"}
+						</td>
+						<td>
+							{$item.repay_time}{if $item.repay_time_type eq 0}天{else}个月{/if} / 
+	                        {function name="number_format" v="$item.rate" f="2"}%
+						</td>
+						<td>
+							<img src="{$TMPL}/images/{$item.point_level}.png" width="40" align="absmiddle" alt="{$item.point_level}" title="{$item.point_level}">
+						</td>
+						<td>
+							<div class="greenProcessBar progressBar w100" style="border:1px solid #FDECC7; background:#FFF6E5">
+		                        <div class="p"><div class="c" style="width:{$item.progress_point}%;{if $item.deal_status eq 4 || $item.deal_status eq 5}background:url('{$TMPL}/images/progressBarBg2.png') repeat-x{/if}"></div></div>
+		                    </div>
+							<div class="f_dgray" style="font-size:12px">
+								{if $item.has_transfer gt 0}
+								 {if $item.deal_status eq 4 || $item.deal_status eq 5}
+								 <p>还款： {function name="round" v="$item.progress_point"}%</p>
+								 {/if}
+								已转让
+								{else}
+								 {if $item.deal_status eq 4 || $item.deal_status eq 5}
+								 <p>还款： {function name="round" v="$item.progress_point"}%</p>
+								 <a href="{url x="index" r="uc_invest#refdetail" p="id=$item.id"}" class="f_red">详情</a>
+								 {else}
+								 <p>投标：{function name="round" v="$item.progress_point"}%</p>
+								 {/if}
+								{/if}
+							</div>
+						</td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+			<div class="pages">{$pages}</div>
+			{else}	
+			<div align="center" style="padding:20px 0">暂无记录</div>
+			{/if}
+		</div>
+	</div>
+</div>

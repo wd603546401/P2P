@@ -1,0 +1,37 @@
+{include file="inc/header.html"} 
+	<div class="blank"></div>
+	<div class="short f_l wb">
+		{include file="inc/usagetip/usa_right.html"}
+	</div>
+	<div class="long help_long wb f_r" style="width:878px;" >
+		<div class="p15">
+			<h3 class="f18 f_blue">使用技巧</h3>
+			{if $list}
+			<div class="inc">
+				<div class="inc_main cf">
+					<ul class="article_list">
+					{foreach from=$list item=item}
+					<li>
+						<span class="f_l">
+							<a href="{url x="index" r="usagetip" p="id=$item.id"}" title="{$item.title}">{$item.title}</a>
+						</span>
+						<span class="f_r">
+							{function name="to_date" v=$item.update_time f="Y-m-d"}
+						</span>
+					</li>
+					{/foreach}
+					</ul>
+				</div>
+				<div class="inc_foot"></div>
+			</div>
+			{else}
+			{$page_title}{$LANG.NO_ARTICLE}
+			{/if}
+			<div class="blank"></div>
+			<div class="pages">{$pages}</div>
+			<div class="blank"></div>
+		</div>
+	</div>
+	<div class="blank"></div>
+
+{include file="inc/footer.html"}

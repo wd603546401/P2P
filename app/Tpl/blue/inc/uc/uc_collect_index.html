@@ -1,0 +1,126 @@
+<script type="text/javascript" src="{$TMPL}/js/jscharts_cr.js"></script>
+<div class="list">
+	<div class="list_title clearfix">
+		<div class="cur"><a href="{url x="shop" r="uc_collect#index"}">{$LANG.UC_COLLECT}</a></div>
+	</div>
+	<div class="list_cont">
+		<div class="i_deal_list clearfix">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr border="0" style="background-color:#00bef0; color:#fff; height:34px;">
+						<th style="width:10%">图片</th>
+						<th style="width:20%">标题/借款人/所在地</th>
+						<th style="width:15%">借款用途</th>
+						<th style="width:15%">金额/期限/利率</th>
+						<th style="width:10%">信用等级</th>
+						<th style="width:15%">进度/剩余时间</th>
+						<th style="width:15%">操作</th>
+					</tr>
+					{foreach from=$list item="item" key=key name="item"}
+					<tr class="item {if $key mod 2 eq 1}item_1{/if}" {if $smarty.foreach.deal.last}style="border-bottom:0"{/if}>
+						<td>
+							<a href="{url x="index" r="deal" p="id=$item.id"}">
+		                       <img src="{$item.icon}" width="64px" height="64px" class="img_b" alt="{$item.name}" title="{$item.name}">
+		                    </a>
+						</td>
+						<td>
+							<div style="font-weight: bold">
+								<a href="{url x="index" r="deal" p="id=$item.id"}">{$item.name}</a>
+							</div>
+	                    	<div>
+	                    		<a href="{url x="index" r="space" p="id=$item.user_id"}">{$item.user_name}</a> / {$item.user_location}
+	                    	</div>
+						</td>
+						<td>
+							{$item.type_match_row}
+						</td>
+						<td>
+							<div>
+	                        {$item.borrow_amount_format}
+		                    </div>
+		                    <div>
+		                        {$item.repay_time}{if $item.repay_time_type eq 0}天{else}个月{/if} / 
+		                        {function name="number_format" v="$item.rate" f="2"}%
+		                    </div>
+						</td>
+						<td>
+							<img src="{$TMPL}/images/{$item.point_level}.png" width="24" align="absmiddle" alt="{$item.point_level}" title="{$item.point_level}">
+						</td>
+						<td>
+	                    	<div class="graph-box">
+										<p>
+											{if  $item.deal_status eq 5}
+											100%
+											{elseif $item.deal_status eq 4}
+											{function name='round' v='$item.repay_progress_point' f=0}%
+											{else}
+											{function name="round" v=$item.progress_point f=0}%
+											{/if}
+										</p>
+				                    	<div id="graph-{$item.id}"></div>
+									</div>
+									<script type="text/javascript">
+									  	{if  $item.deal_status eq 5}
+										<!--//已还清-->
+										var colors = ['#00bef0', '#e7e5e5'];
+										var myData = new Array(['OK', 100], ['NO', 0]);
+										{elseif $item.deal_status eq 4}
+										<!--//还款中-->
+										var colors = ['#00bef0', '#e7e5e5'];
+										var myData = new Array([' ', {function name='round' val=$item.repay_progress_point f=2}], [' ', <?php echo 100-round($this->_var['item']['repay_progress_point'],2) ?>]);
+										{else}
+										<!--//筹款中-->
+										var colors = ['#00bef0', '#e7e5e5'];
+										var myData = new Array([' ', {function name='round' val=$item.progress_point f=2}], [' ', <?php echo 100-round($this->_var['item']['progress_point'],2) ?>]);
+										{/if}
+										var myChart = new JSChart('graph-{$item.id}', 'pie');
+										myChart.setDataArray(myData);
+										myChart.colorizePie(colors);
+										myChart.setTitleColor('#8E8E8E');
+										myChart.setTitleFontSize(0);
+										myChart.setTextPaddingTop(280);
+										myChart.setPieValuesDecimals(1);
+										myChart.setPieUnitsFontSize(0);
+										if($.browser.msie)
+											myChart.setPieValuesFontSize(0);
+										else
+											myChart.setPieValuesFontSize(100000000);
+										myChart.setPieValuesColor('#fff');
+										myChart.setPieUnitsColor('#969696');
+										myChart.setSize(46, 46);
+										myChart.setPiePosition(0, 0);
+										myChart.setPieRadius(23);
+										myChart.setFlagColor('#1BB8E3');
+										myChart.setFlagRadius(4);
+										myChart.setTooltipOpacity(1);
+										myChart.setTooltipBackground('#ddf');
+										myChart.setTooltipPosition('ne');
+										myChart.setTooltipOffset(2);
+										myChart.draw();
+									</script>
+						</td>
+						<td>
+							<a href="{url x="shop" r="uc_collect#del" p="id=$item.cid"}" class="btn_del">{$LANG.DELETE}</a>
+						</td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+			<div class="pages">{$pages}</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	var p_width=$(".i_deal_list p").width();
+   	var box_width=$(".i_deal_list .graph-box").width();
+   	var left_w=(box_width/2)-(p_width/2);
+
+   	$(".i_deal_list p").css("left",left_w+"px");
+	$("#my_favoriteLoan_list .item").hover(function(){
+		$(this).css({"background":"#f7f7f7"});
+	},function(){
+		$(this).css({"background":"#fff"});
+	});
+})
+</script>

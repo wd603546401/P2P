@@ -1,0 +1,28 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">{$main_title}</div>
+<div class="blank5"></div>
+<php>
+	function get_ctype_name($type){
+		$credit_type= load_auto_cache("credit_type");
+		return $credit_type['list'][$type]['type_name'];
+	}
+</php>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="credit" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px,user_id|get_user_name:会员,type|get_ctype_name:类型,create_time|to_date:上传时间" 
+	actionlist="do_credit:操作" /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

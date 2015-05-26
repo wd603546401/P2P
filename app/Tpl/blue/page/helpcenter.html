@@ -1,0 +1,71 @@
+{include file="inc/header.html"}
+<style type="text/css">
+	.faq .b {
+		color: #00bef0;
+		font-weight: 600;
+		padding: 10px 0 0;
+	}
+	#uc_cate .c_hd{ background-image:none; padding-left:30px;color:#666; background:#ececec}
+	#uc_cate .c_hd_cur{ background:#00bef0;color:#fff}
+</style>
+<div class="blank"></div>
+<div class="short_uc f_l">
+	<dl id="uc_cate">
+		{foreach from=$article_cate item="cate" key=key}
+		{if $cate.pid neq 0}
+			<div class="c_hd " id="c_hd_{$cate.id}" rel="{$cate.id}">
+			    {$cate.title}
+			</div>
+		{/if}
+		{/foreach}
+	</dl>
+</div>
+<div class="long_uc f_r faq wb" style="overflow:inherit;" id="J_box">
+	<div class="p15">
+		{foreach from=$article_cate item="cate"}
+			{if $cate.pid neq 0}
+			<div id="J_box_{$cate.id}" class="j_box_item hide" rel="{$cate.id}">
+				<h3 class="f24 f_blue  pb10"> {$cate.title}</h3>
+				{foreach from=$cate.article.list item=aitem}
+				<div class="clearfix pl10 pr10">
+					<div class="f16 pt10 pb10 " id="q{$aitem.id}" name="q{$aitem.id}">
+						<a href="javascript:void(0);" class="item-tit f_dgray"><b>{$aitem.title}</b></a>
+                  	</div>
+					<div class="clearfix f_dgray hide item-content" style="padding:3px 20px">
+					{$aitem.content}
+					</div>
+				</div>
+				{/foreach}
+			</div>
+			{/if}
+		{/foreach}
+	</div>
+</div>
+<div class="blank"></div>
+{include file="inc/footer.html"}
+<script type="text/javascript">
+jQuery(function(){
+	if($("#J_box .vvs").length == 0){
+		$("#J_box .j_box_item:first").removeClass("hide");
+		$("#uc_cate .c_hd:first").addClass("c_hd_cur");
+	}
+	
+	$("#uc_cate .c_hd").click(function(){
+		$("#uc_cate .c_hd").removeClass("c_hd_cur");
+		$(this).addClass("c_hd_cur");
+		var idx = $(this).attr("rel");
+		$(".j_box_item").addClass("hide");
+		$("#J_box_"+idx).removeClass("hide");
+	});
+	
+	$(".j_box_item .item-tit").click(function(){
+		if($(this).parent().parent().find(".item-content").hasClass("hide")){
+			$(this).parent().parent().find(".item-content").removeClass("hide");
+		}
+		else{
+			$(this).parent().parent().find(".item-content").addClass("hide");
+		}
+	});
+	
+});
+</script>

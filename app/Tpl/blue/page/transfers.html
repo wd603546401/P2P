@@ -1,0 +1,299 @@
+{include file="inc/header.html"}
+<adv adv_id="债权转让列表页顶部广告" />
+	<p class="pos"><a href="{url x="index" r="index"}">首页</a> > <a href="{url x="index" r="transfer"}">转让列表</a></p>
+	
+	<div id="content" class="clearfix">
+		<div class="short filterbox">
+			<div class="bddf clearfix" id="deallist" name="deallist">
+				<div class="filter clearfix">
+		            <div class="f_l f_dgray b">按条件搜索</div>
+		        </div>
+		        <div class="propAttrs clearfix pr {if $months_type neq 0 || $lefttime neq 0}v{/if}" id="search_condition" {if $months_type eq 0 && $lefttime eq 0}style="height:130px"{/if}>
+					<a href="javascript:void(0);" class="j_more  ps" style="bottom:10px;right:10px;z-index:10;color:#01bcef">更多筛选</a>
+		            <form action="{url x="index" r="deals" p="cid=$cid"}" method="post" id="searchByConditionForm">
+		                
+		                {if $cate_list_url}
+						<div class="attr">
+		                    <div class="attrKey">认证标识：</div>
+		                    <div class="attrValues">
+								<ul class="av-collapse" id="dashboard">
+									{foreach from =$cate_list_url item="cates" key=key}
+									<li >
+										<a href="{$cates.url}#deallist" {if $cates.id eq $cate_id}class="cur"{/if}>{$cates.name}</a>
+									</li>
+									{/foreach}								
+								</ul>
+		                    </div>
+		                </div>
+						{/if}
+						
+						   
+		                <div class="attr">
+							<div class="attrKey">区域列表：</div>
+							<div class="attrValues">
+								<ul class="av-collapse" name="city" id="city">
+									{foreach from="$city_urls" item="city" key=key}
+		                            <li><a href="{$city.url}#deallist"  {if $city.id eq $city_id} class="cur" {/if}>{$city.name}</a></li>
+									{/foreach}
+		                        </ul>
+		                    </div>
+		                </div>
+						{if $sub_citys}
+						<div class="attr">
+							<div class="attrKey">城市列表：</div>
+							<div class="attrValues">
+								<ul class="av-collapse" name="city" id="city">
+									{foreach from="$sub_citys" item="scity" key=key}
+		                            <li><a href="{$scity.url}#deallist"  {if $scity.id eq $scity_id} class="cur" {/if}>{$scity.name}</a></li>
+									{/foreach}
+		                        </ul>
+		                    </div>
+		                </div>
+						{/if}
+						
+						
+						<div class="attr">
+		                    <div class="attrKey">信誉等级：</div>
+		                    <div class="attrValues">
+								<ul class="av-collapse" name="level" id="level">
+									{foreach from =$level_list_url item="ilevel" key=key}
+								   <li>
+									   <a href="{$ilevel.url}#deallist" {if $level eq $ilevel.id}class="cur"{/if}>{$ilevel.name}{if $key neq 0}以上{/if}</a>
+								   </li>
+								   {/foreach}
+								</ul>
+							</div>
+		                </div>
+						<div class="attr">
+		                    <div class="attrKey">回馈利率：</div>
+		                    <div class="attrValues">
+								<ul class="av-collapse" name="interest" id="interest">
+		                           {foreach from =$interest_url item="iinterest" key=key}
+								   <li>
+									   <a href="{$iinterest.url}#deallist" {if $interest eq $iinterest.interest}class="cur"{/if}>{$iinterest.name}{if $key neq 0}以上{/if}</a>
+								   </li>
+								   {/foreach}
+		                        </ul>
+		                    </div>
+		                </div>
+		                
+		             
+		                
+		                
+						<div class="attr">
+							<div class="attrKey">借款期限：</div>
+							<div class="attrValues">
+								<ul class="av-collapse" name="interest" id="months">
+									{foreach from="$months_type_url" item="months" key=key}
+		                            <li><a href="{$months.url}#deallist" {if $key eq $months_type}class="cur"{/if}>{$months.name}</a></li>
+									{/foreach}
+		                        </ul>
+		                    </div>
+		                </div>
+						<div class="attr">
+		                    <div class="attrKey">剩余时间：</div>
+		                    <div class="attrValues">
+								<ul class="av-collapse" name="lefttime" id="lefttime">
+		                            {foreach from =$lefttime_url item="ilefttime" key=key}
+								   <li>
+									   <a href="{$ilefttime.url}#deallist" {if $lefttime eq $ilefttime.lefttime}class="cur"{/if}>{$ilefttime.name}{if $key neq 0}以内{/if}</a>
+								   </li>
+								   {/foreach}
+		                        </ul>
+		                    </div>
+		                </div>
+		            </form>
+		        </div>
+			</div>
+			<div class="blank"></div>
+			<div class="blank"></div>
+		</div>
+		<div class="list">
+			<div class="list_title clearfix">
+				<div onclick="window.location.href='{url x="index" r="deals"}'">投资列表</div>
+				<div class="cur">债权转让</div>
+				<a href="{url x="index" r="tool"}" class="calt">理财计算器</a>
+			</div>
+			<div class="list_cont">
+				<div class="i_deal_list clearfix">
+				{if $transfer_list}
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr  border="0" style="background-color:#00bef0; color:#fff; height:34px;">
+				        <th>标题</th>
+						<th style="width:15%">转让人  / 承接人</th>
+						<th style="width:18%">本/息/<a href="#" onclick="set_sort('borrow_amount');" style="color:#fff;">转让金</a></th>
+						<th style="width:10%"><a href="#" onclick="set_sort('rate');" style="color:#fff;">利率</a></th>
+						<th style="width:10%"><a href="#" onclick="set_sort('repay_time');" style="color:#fff;">待还</a>/总期数</th>
+						<th style="width:10%"><a href="#" onclick="set_sort('ulevel');" style="color:#fff;">信用等级</a></th>
+						<th style="width:15%"><a href="#" onclick="set_sort('remain_time');" style="color:#fff;">剩余时间</a></th>
+				    </tr>
+					{if $transfer_list}
+					{foreach from=$transfer_list item="deal" key=key}
+					<tr class="item {if $key mod 2 eq 1}item_1{/if} tc">
+		                <td style="text-align:left">
+		                	&nbsp;&nbsp;<img src="{$deal.cate_info.icon}" width="24" height="24" class="ico" />
+		                    <a href="{$deal.url}" target="_blank">
+		                      {$deal.name}
+		                    </a>
+		                </td>
+		                <td>
+							<div class="f_gray">
+	                          <a href="{$deal.user.url}" target="_blank">{$deal.user.user_name}</a>
+	                      	</div>
+							{if $deal.tuser}
+							<div class="f_gray">
+	                          <a href="{$deal.tuser.url}" target="_blank">{$deal.tuser.user_name}</a>
+	                      	</div>
+							{/if }
+		                </td>
+		                <td>
+		                  	<div>{$deal.left_benjin_format}</div>
+							<div>{$deal.left_lixi_format}</div>
+		                    <div>
+		                        {function name="format_price" v="$deal.transfer_amount"}
+		                    </div>
+		                </td>    
+		                <td>
+		                    <div>
+		                        {function name="number_format" v="$deal.rate" f="2"}%
+		                    </div>
+		                      
+		                </td>
+		                <td>
+		                    <span class="f_red">{$deal.how_much_month}/{$deal.repay_time}
+		                </td>
+		                <td>
+		                    <a href="{$deal.duser.url}" target="_blank"><img src="{$TMPL}/images/{$deal.duser.point_level}.png" width="40" align="absmiddle" alt="{$deal.duser.point_level}" title="{$deal.duser.point_level}"></a>
+		                </td>
+		                <td>
+                          	{if $deal.t_user_id gt 0}
+								已转让
+							{else}
+								{if $deal.status eq 0}
+									已撤销
+								{else}
+								{$deal.remain_time_format}
+								{if $deal.remain_time lt 0}
+								  	逾期还款
+								{/if}
+								{/if}
+							{/if}
+		                </td>
+			        </tr>
+					{/foreach}
+					{else}
+					<tr><td colspan="7">没有数据</td></tr>
+					{/if}
+				</table>
+				{/if}
+			</div>
+			<div class="pages">{$pages}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(function(){
+		$("#searchByKeyForm .searchinput").bind("focus",function(){
+			if($.trim($(this).val())=="请输入您的搜索条件"){
+				$(this).val("");
+				$(this).removeClass("f_dgray");
+			}
+		});
+		
+		$("#searchByKeyForm .searchinput").bind("blur",function(){
+			if($.trim($(this).val())=="请输入您的搜索条件" || $.trim($(this).val())==""){
+				$(this).val("请输入您的搜索条件");
+				$(this).addClass("f_dgray");
+			}
+		});
+		
+		$("#search_condition .j_more").click(function(){
+			if(!$("#search_condition").hasClass("v")){
+				$("#search_condition").css({"height":"220px"});
+				$("#search_condition").addClass("v");
+			}
+			else{
+				$("#search_condition").css({"height":"130px"});
+				$("#search_condition").removeClass("v");
+			}
+		});
+	});
+	function searchByCondition(){
+		$("#searchByConditionForm").submit();
+	}
+	function searchLoans(){
+		if($.trim($("#searchByKeyForm .searchinput").val())=="请输入您的搜索条件" || $.trim($("#searchByKeyForm .searchinput").val())==""){
+			$.showErr("请输入您的搜索条件");
+			return false;
+		}
+		$("#searchByKeyForm").submit();
+	};
+	
+	function calculate(){
+		var amount=$("#calculateAmount").val();
+        var interest=$("#calculateInterest").val();
+        var month=$("#calculateMonth").val();
+		var repayType = $("#repayType").val();
+
+        if((amount.replace(/[ ]/g, "")) == "" || (amount.replace(/[ ]/g, "")) == null||amount==""||amount==null){
+            $.showErr("请输入初始投资");
+            return;
+        }else{
+            amount=$.trim(amount);
+            if(/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(amount)==false){
+                $.showErr("初始投资只能为整数或者小数且最多只能有两位小数");
+                return;
+            }else{
+                if(amount>1000000){
+                    $.showErr("初始投资为100万以下");
+                    return;
+                }
+            }
+        }
+        if((interest.replace(/[ ]/g, "")) == "" || (interest.replace(/[ ]/g, "")) == null||interest==""||interest==null){
+            $.showErr("请输入年利率");
+            return;
+        }else{
+            interest=$.trim(interest);
+            if(/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(interest)==false){
+                $.showErr("年利率只能为整数或者小数且最多只能有两位小数");
+                return;
+            }else{
+                if(interest>=100){
+                    $.showErr("年利率必须在100%以下");
+                    return false;
+                }
+            }
+        }
+        if((month.replace(/[ ]/g, "")) == "" || (month.replace(/[ ]/g, "")) == null||month==""||month==null){
+            $.showErr("请输入投资期限");
+            return;
+        }else{
+            month=$.trim(month);
+            if(/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(month)==false){
+                $.showErr("投资期限只能为整数或者小数且最多只能有两位小数");
+                return;
+            }else{
+                if(month>100){
+                    $.showErr("投资期限为100月以内");
+                    return;
+                }
+            }
+        }
+        var value = 0;
+	    var inters= interest /(100*12);
+		if(repayType==0){
+			value= month*amount*(inters*Math.pow((1+inters), month) / (Math.pow((1+inters),month)-1));
+		}
+		else if(repayType==1){
+			value = parseFloat(amount) + parseFloat(inters*amount*month);
+		}
+		else if(repayType==2){
+			value = parseFloat(amount) + parseFloat(inters*amount*month);
+		}
+		
+        $("#lastValue").html(formatNum(value));
+    }
+</script>
+{include file="inc/footer.html"}

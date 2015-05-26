@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Generator" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{if $page_title}{$page_title} - {/if}{if $show_site_titile eq 1}{function name='app_conf' value='SHOP_SEO_TITLE'} - {/if}{$site_info.SHOP_TITLE}</title>
+<link rel="icon" href="favicon.ico" type="/image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="/image/x-icon" />
+<meta name="keywords" content="{if $page_keyword}{$page_keyword}{/if}{$site_info.SHOP_KEYWORD}" />
+<meta name="description" content="{if $page_description}{$page_description}{/if}{$site_info.SHOP_DESCRIPTION}" />
+<?php
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/style.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/weebox.css";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.bgiframe.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.weebox.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.pngfix.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/lazyload.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/op.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/op.js";
+if(app_conf("APP_MSG_SENDER_OPEN")==1)
+{
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/msg_sender.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/msg_sender.js";
+}
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/main.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/user_login_reg.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+
+<script type="text/javascript">
+var APP_ROOT = '{$APP_ROOT}';;
+var LOADER_IMG = '{$TMPL}/images/lazy_loading.gif';
+var ERROR_IMG = '{$TMPL}/images/image_err.gif';
+var send_span = {function name="app_conf" v="SEND_SPAN"}000;
+{if app_conf("APP_MSG_SENDER_OPEN") eq 1 && $DEAL_MSG_COUNT > 0}
+var to_send_msg = true;
+{else}
+var to_send_msg = false;
+{/if}
+</script>
+<script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/lang.js"></script>
+<script type="text/javascript" src="{function name="parse_script" v="$pagejs" c="$cpagejs"}"></script>
+<style type="text/css">
+	.user-lr-box-left .field .holder_tip{left: 180px;_left:-240px;top:0}
+	.register_box .user-lr-box-left .field .f-input-tip{ _position:absolute;_left:-287px;}
+	.logo a{ display:block;}
+
+	.abc .form_err{
+	 margin-top:-25px;
+	}
+
+	.regstep { width:400px; float:right; margin:0;}
+	.ui-step{ margin:30px;}
+#and .form_err {
+    min-width: 176px;
+	_width: 176px;
+}
+.header{ height:42px; margin-bottom:0;}
+.r_tabs{ position:absolute; z-index:10; padding-left:100px; padding-top:8px;}
+.r_tab{ width:100px; height:28px; border:solid 1px #ddd; float:left; line-height:31px; text-align:center; background:#f7f7f7; margin:0 5px 0 5px; margin-top:3px;  cursor:pointer;}
+.r_current{ height:31px; line-height:31px; background:#fff; margin-top:0; border-bottom:solid 1px #fff; cursor:default;}
+.clr{ clear:both; height:0px;}
+.head .head_cont{ height:100px;}
+.head .head_cont .constr{ height:100px;}
+</style>
+</head>
+
+<body class="register_body">
+	<div class="head z100" id="j_head">
+		<div class="head_cont">
+			<div class="wrap constr clearfix">
+				<div class="logo f_l">
+					<a class="link" href="{$APP_ROOT}/">
+						<span class="agency_log"></span>
+					</a>
+				</div>
+				<!--{if $MODULE_NAME == 'user'}-->
+				<div class="f_yahei no-nav-text">{if $ACTION_NAME == 'login'}登录{elseif $ACTION_NAME eq 'register'}注册{/if}</div>
+				<!--{/if}-->
+                <div class="regstep">
+            <ol class="ui-step ui-step-3">
+                <li class="ui-step-start ui-step-done">
+                    <div class="ui-step-line">-</div>
+                    <div class="ui-step-icon">
+                        <i class="iconfont"></i>
+                        <i class="ui-step-number">1</i>
+                        <span class="ui-step-text">填写账户信息</span>
+                    </div>
+                </li>
+                <li class="ui-step-active">
+                    <div class="ui-step-line">-</div>
+                    <div class="ui-step-icon">
+                        <i class="iconfont"></i>
+                        <i class="ui-step-number">2</i>
+                        <span class="ui-step-text">实名信息</span>
+                    </div>
+                </li>
+                <li class="ui-step-end">
+                    <div class="ui-step-line">-</div>
+                    <div class="ui-step-icon">
+                        <i class="iconfont"></i>
+                        <i class="ui-step-number">3</i>
+                        <span class="ui-step-text">注册成功</span>
+                    </div>
+                </li>
+            </ol>
+        </div>
+			</div>
+		</div>
+	</div>
+	<div class="blank20"></div>
+	
+	
+		
+	
+	
+	
+	
+	
+	<div class="blank"></div>
+	<div class="inc  wrap register_box">
+		<div>
+			
+			<div class="inc_main clearfix bdd wb">
+				<div class="user-lr-box-left f_l" style="width:590px">
+					<form action="{url x="shop" r="manageagency#do_re_name_id"}" method="post" id="re_name_and_id">
+                        
+						<div class="field real_name pr t1" >
+							<label for="real_name"><span class="f_red">*</span>姓名</label>
+							<span class="holder_tip ps" >输入真实姓名</span>
+							<input type="text" class="f-input ipttxt" id="real_name" name="real_name" size="30">
+							<span class="f-input-tip"></span> 
+							<span class="hint"></span> 
+							<input  name="re_user_id" style=" display:none;"  value="{$user_info.id}">
+						</div>
+						<div class="blank1"></div>
+						
+						<div class="field idno pr t1">
+							<label for="idno"><span class="f_red">*</span>身份证号</label>
+							<span class="holder_tip ps" >输入身份证</span>
+							<input type="text" class="f-input ipttxt" id="idno" name="idno" size="30" onkeyup="idcheck(this);">
+							<span class="f-input-tip"></span> 
+							<span class="hint"></span> 
+						</div>
+						<div class="blank10"></div>
+						
+						<div class="act">
+							<input  style="  margin-top: 5px;" type="submit" class="reg-submit-btn" id="commit" name="commit" value="验证">				
+						</div>
+					</form>
+				</div>
+				<div class="user-lr-box-right f_r">
+					
+				</div>
+			</div>		
+			<div class="inc_foot"></div>
+		</div>
+	</div>
+
+
+
+<script type="text/javascript">
+
+
+jQuery(function(){
+	
+	
+	$("#re_name_and_id").submit(function(){
+		
+	
+		if($.trim($(".real_name #real_name").val()).length == 0)
+		{			
+			formError($(".real_name #real_name"),"真实姓名不为空");
+			return false;
+		}	
+		
+		if($.trim($(".idno #idno").val()).length == 0)
+		{			
+			formError($(".idno #idno"),"身份证号不为空");
+			return false;
+		}
+		
+		if(  ($.trim($(".idno #idno").val()).length == 18 ) || ($.trim($(".idno #idno").val()).length ==15))
+		{			
+			
+		}	
+		else
+		{	
+			formError($(".idno #idno"),"身份证格式错误");
+			return false;
+		}
+		return true;
+	});
+	
+
+	$("#re_name_and_id .holder_tip").click(function(){
+		$(this).hide();
+		$(this).parent().find(".f-input").focus();
+	});
+	$(".register_box .f-input").focus(function(){
+		$(this).parent().find(".holder_tip").hide();
+	});
+	$(".register_box .f-input").blur(function(){
+		if($(this).val()==""){
+			$(this).parent().find(".holder_tip").show();
+		}
+	});
+	
+	$(".idno #idno").bind("blur",function(){
+		var obj = $(this);
+		if($.trim(obj.val()).length == 0)
+		{			
+			formError(obj,"身份证号不为空");
+			return false;
+		}
+		
+		if(  ($.trim(obj.val()).length == 18 ) || ($.trim(obj.val()).length ==15))
+		{			
+			formSuccess(obj,"验证正确");
+			return true;
+		}	
+		else
+		{	
+			formError(obj,"身份证格式错误");
+			return false;
+		}
+	}); //身份证验证
+	
+	$(".real_name #real_name").bind("blur",function(){
+		var obj = $(this);
+		if($.trim(obj.val()).length == 0)
+		{			
+			formError(obj,"用户名不为空");
+			return false;
+		}	
+		formSuccess(obj,"验证正确");
+		return true;
+	}); //用户名验证
+	
+});
+</script>
+
+</div>
+<div class="blank"></div>
+	<div class="wrap clearfix">
+	 	<div class="copyright clearfix tc" style="padding:8px ;background:#f7f7f7; color:#757575">
+			{function name="app_conf" value="SHOP_FOOTER"} 
+        </div>
+	</div>
+</body>
+</html>
